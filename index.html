@@ -144,28 +144,6 @@
   .header-brand:hover .logo-lockup {
     transform: scale(1.06) rotate(-2deg);
   }
-  .logo-mark {
-    position: relative;
-    width: 40.307px;
-    height: 19.94px;
-    flex-shrink: 0;
-    transition: transform 0.25s ease;
-  }
-  .header-brand:hover .logo-mark {
-    transform: scale(1.1) rotate(-6deg);
-  }
-  .logo-mark img {
-    position: absolute;
-    display: block;
-  }
-  .header-wordmark {
-    font-family: var(--font-body);
-    font-weight: 800;
-    font-size: 23.328px;
-    letter-spacing: 0.829px;
-    color: var(--ink);
-    line-height: 1;
-  }
   .header-nav {
     display: flex;
     align-items: center;
@@ -764,8 +742,7 @@
     align-items: center;
     gap: 6px;
   }
-  .footer-brand .header-wordmark { color: var(--ground); }
-  .footer-brand:hover .logo-mark { transform: scale(1.1) rotate(-6deg); }
+  .footer-brand:hover .logo-lockup { transform: scale(1.06) rotate(-2deg); }
   .footer-links {
     display: flex;
     gap: 36px;
@@ -842,7 +819,7 @@
     .nav-link::after { transition: none; }
     .cta-button,
     .header-pill,
-    .logo-mark, .logo-lockup,
+    .logo-lockup,
     .step-card, .step-number,
     .feature-card, .feature-icon, .feature-hero-card, .feature-hero-card img,
     .team-card, .team-card img,
@@ -1107,12 +1084,7 @@
   <div class="footer-inner">
     <div class="footer-main">
       <div class="footer-brand">
-        <span class="logo-mark" aria-hidden="true">
-          <img src="assets/logo/logo-mark-1-light.svg" alt="" style="left:18.47px; top:6.6px; width:21.993px; height:13.416px;">
-          <img src="assets/logo/logo-mark-2-light.svg" alt="" style="left:0; top:5.06px; width:22.213px; height:14.955px;">
-          <img src="assets/logo/logo-mark-3-light.svg" alt="" style="left:6.16px; top:0; width:25.435px; height:20.014px;">
-        </span>
-        <span class="header-wordmark">TwinCloud</span>
+        <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup-footer.svg" alt="TwinCloud">
       </div>
       <nav class="footer-links" aria-label="Footer">
         <a href="#about">About us</a>
