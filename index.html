@@ -177,6 +177,11 @@
   @media (max-width: 767px) {
     .header-nav { display: none; }
     .site-header { padding: 0 16px; }
+    .header-brand .logo-lockup {
+      width: 60px;
+      object-fit: none;
+      object-position: left center;
+    }
   }
 
   /* ---- Hero ---- */
@@ -255,14 +260,16 @@
   }
   @media (max-width: 767px) {
     .hero { height: 560px; }
-    .hero-content { padding-top: 72px; }
+    .hero-content { padding-top: 112px; }
     .hero-heading { font-size: 34px; }
     .hero-subtitle { font-size: 18px; }
+    .hero-bg-wrap { bottom: -20px; }
   }
   @media (max-width: 480px) {
     .hero { height: 520px; }
-    .hero-content { padding-top: 56px; }
+    .hero-content { padding-top: 104px; }
     .hero-heading { font-size: 28px; }
+    .hero-bg-wrap { bottom: -10px; }
   }
 
   /* ---- Shared section layout ---- */
