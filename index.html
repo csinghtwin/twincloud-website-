@@ -733,9 +733,6 @@
     border: 1.2px solid var(--border);
     border-radius: 14.4px;
     overflow: hidden;
-    background-image: url("assets/images/cal-booking-preview.png");
-    background-size: cover;
-    background-position: top center;
     background-color: var(--ground);
     transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.3s ease, opacity 0.3s ease;
   }
@@ -743,8 +740,20 @@
     border-color: var(--accent);
     box-shadow: 0 12px 32px rgba(23, 41, 71, 0.1);
   }
+  .contact-shot::before {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    background-image: url("assets/images/cal-booking-preview.png");
+    background-size: cover;
+    background-position: top center;
+    filter: blur(14px);
+    z-index: 0;
+  }
+  #my-cal-inline-30min { position: relative; z-index: 1; }
   .cal-consent {
     position: absolute;
+    z-index: 1;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -760,6 +769,7 @@
     border-radius: 16px;
     box-shadow: 0 12px 40px rgba(23, 41, 71, 0.18);
   }
+  .cal-consent .cta-button { width: auto; white-space: nowrap; padding: 0 24px; }
   .cal-consent-text {
     max-width: 420px;
     font-family: var(--font-body);
