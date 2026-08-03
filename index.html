@@ -810,6 +810,7 @@
     align-items: center;
     gap: 6px;
   }
+  .footer-brand .logo-lockup { height: 41.6px; }
   .footer-brand:hover .logo-lockup { transform: scale(1.06) rotate(-2deg); }
   .footer-links {
     display: flex;
@@ -901,6 +902,7 @@
   }
   .cookie-banner-text a { color: var(--primary); font-weight: 700; text-decoration: underline; }
   .cookie-banner-actions { display: flex; gap: 12px; flex-shrink: 0; }
+  .cookie-banner-actions .cta-button { width: auto; padding: 0 24px; justify-content: center; white-space: nowrap; }
   @media (max-width: 600px) {
     .cookie-banner { padding: 16px 20px; }
     .cookie-banner-inner { flex-direction: column; align-items: stretch; }
@@ -949,7 +951,7 @@
 
 <div class="cookie-banner" id="cookie-banner">
   <div class="cookie-banner-inner">
-    <p class="cookie-banner-text">We only load optional features — like our booking calendar — after you choose to. Nothing else is tracked. See our <a href="#">Privacy Policy</a>.</p>
+    <p class="cookie-banner-text">We only load optional features, like our booking calendar, after you choose to. Nothing else is tracked. See our <a href="#">Privacy Policy</a>.</p>
     <div class="cookie-banner-actions">
       <button class="cta-button secondary" id="cookie-reject" type="button"><span>Reject</span></button>
       <button class="cta-button" id="cookie-accept" type="button"><span>Accept</span></button>
