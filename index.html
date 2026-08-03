@@ -176,7 +176,16 @@
 
   @media (max-width: 767px) {
     .header-nav { display: none; }
-    .site-header { padding: 0 16px; }
+    .site-header { top: 0; padding: 0; }
+    .header-pill {
+      max-width: 100%;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+      backdrop-filter: none;
+      padding: 14px 20px;
+    }
     .header-brand .logo-lockup { height: 38px; }
   }
 
