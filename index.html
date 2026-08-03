@@ -173,9 +173,27 @@
     right: 0;
   }
   .header-cta { flex-shrink: 0; }
+  .header-guide-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--mid);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+  .header-guide-link:hover { color: var(--accent-dark); background: var(--accent-tint); }
 
   @media (max-width: 767px) {
     .header-nav { display: none; }
+    .header-guide-link { display: none; }
     .site-header { top: 0; padding: 0; }
     .header-pill {
       max-width: 100%;
@@ -866,6 +884,7 @@
       <a class="nav-link" href="#how-it-works">How it Works</a>
       <a class="nav-link" href="#about">About us</a>
     </nav>
+    <a class="header-guide-link" href="capture-guide.html">360° Capture Guide</a>
     <a class="cta-button header-cta" href="#contact"><span>Book a Demo</span></a>
   </div>
 </header>

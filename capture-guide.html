@@ -166,14 +166,12 @@
   .hero-block { text-align: center; }
   .hero-block h1 {
     font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 45px;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.5;
     margin: 0 0 8px;
   }
-  @media (max-width: 767px) { .hero-block h1 { font-size: 34px; } }
-  .hero-block .sub { color: var(--mid); font-size: 1rem; }
+  .hero-block .sub { font-family: var(--font-display); font-weight: 500; color: var(--mid); font-size: 20px; line-height: 30px; }
 
   .rules3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 32px 0; }
   @media (max-width: 620px) { .rules3 { grid-template-columns: 1fr; } }
@@ -220,13 +218,7 @@
     padding: 3px 8px;
   }
   .tile .go { margin-top: auto; color: var(--accent-dark); font-weight: 700; font-size: 0.86rem; }
-  .tile.dark { background: var(--primary); border-color: var(--primary); }
-  .tile.dark .icon-chip { background: rgba(255, 255, 255, 0.1); }
-  .tile.dark:hover .icon-chip { background: rgba(28, 207, 135, 0.25); }
-  .tile.dark h2 { color: var(--white); }
-  .tile.dark p { color: var(--blue-50); }
-  .tile.dark .go { color: var(--accent); }
-  .tile.dark .items span { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.16); color: var(--white); }
+  .tile.tinted { background: var(--ground); }
 
   /* ---- Section views ---- */
   .backlink { display: inline-flex; align-items: center; gap: 6px; color: var(--mid); font-weight: 700; font-size: 0.85rem; margin-bottom: 16px; transition: color 0.2s ease; }
@@ -379,9 +371,9 @@
   </div>
 
   <div class="rules3">
-    <div><b>One fixed position</b>Camera fixed to your body. Free hand still.</div>
-    <div><b>One steady pace</b>Slow indoors, normal outdoors.</div>
     <div><b>One closed loop</b>End where you started.</div>
+    <div><b>One steady pace</b>Slow indoors, normal outdoors.</div>
+    <div><b>One fixed position</b>Camera fixed to your body. Free hand still.</div>
   </div>
 
   <div class="tiles">
@@ -406,7 +398,7 @@
       <span class="items"><span>7 Indoor</span><span>8 Outdoor</span><span>9 Staircases</span></span>
       <span class="go">Open →</span>
     </button>
-    <button class="tile dark" onclick="show('cheatsheet')">
+    <button class="tile tinted" onclick="show('cheatsheet')">
       <span class="icon-chip">⚡</span>
       <h2>Cheat sheet</h2>
       <p>Everything on one screen. Screenshot it.</p>
