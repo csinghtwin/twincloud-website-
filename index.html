@@ -177,10 +177,13 @@
   @media (max-width: 767px) {
     .header-nav { display: none; }
     .site-header { padding: 0 16px; }
-    .header-brand .logo-lockup {
-      width: 60px;
-      object-fit: none;
-      object-position: left center;
+    .header-pill { padding: 8px 12px; }
+    .header-brand .logo-lockup { height: 40px; }
+    .header-cta {
+      height: 36px;
+      padding-left: 16px;
+      font-size: 14px;
+      border-radius: 18px;
     }
   }
 
@@ -259,17 +262,15 @@
     .hero-content { padding-top: 100px; }
   }
   @media (max-width: 767px) {
-    .hero { height: 560px; }
-    .hero-content { padding-top: 112px; }
-    .hero-heading { font-size: 34px; }
+    .hero {
+      height: 80vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero-content { padding-top: 64px; }
+    .hero-heading { font-size: 32px; }
     .hero-subtitle { font-size: 18px; }
     .hero-bg-wrap { bottom: -20px; }
-  }
-  @media (max-width: 480px) {
-    .hero { height: 520px; }
-    .hero-content { padding-top: 104px; }
-    .hero-heading { font-size: 28px; }
-    .hero-bg-wrap { bottom: -10px; }
   }
 
   /* ---- Shared section layout ---- */
@@ -412,6 +413,9 @@
   @media (max-width: 1024px) {
     .how-it-works-grid { flex-direction: column; }
     .video-placeholder { width: 100%; min-width: 0; }
+  }
+  @media (max-width: 767px) {
+    .step-copy h3 { font-size: 18px; }
   }
 
   /* ---- Dashboard showcase ---- */
@@ -587,6 +591,7 @@
   @media (max-width: 1024px) {
     .features-grid { flex-direction: column; }
     .features-col-left, .features-col-right { flex: 1 1 auto; width: 100%; }
+    .feature-hero-card { height: auto; aspect-ratio: 784 / 464; }
   }
   @media (max-width: 600px) {
     .features-small-row { flex-direction: column; }
@@ -721,6 +726,7 @@
 
   @media (max-width: 767px) {
     .contact-heading { font-size: 24px; line-height: 1.5; }
+    .contact-shot { aspect-ratio: 885.6 / 672; }
   }
 
   /* ---- Footer ---- */
@@ -799,10 +805,10 @@
 
   @media (max-width: 767px) {
     .site-footer { padding: 40px 24px 20px; }
-    .footer-main { flex-direction: column; align-items: flex-start; }
-    .footer-links { justify-content: flex-start; gap: 20px 28px; }
-    .footer-utility { justify-content: flex-start; }
-    .footer-utility p { text-align: left; }
+    .footer-main { flex-direction: column; align-items: center; text-align: center; }
+    .footer-links { justify-content: center; gap: 20px 28px; }
+    .footer-utility { justify-content: center; }
+    .footer-utility p { text-align: center; }
   }
 
   /* ---- Scroll reveal ---- */
@@ -848,7 +854,10 @@
 <header class="site-header">
   <div class="header-pill">
     <div class="header-brand">
-      <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup.svg" alt="TwinCloud">
+      <picture>
+        <source media="(max-width: 767px)" srcset="assets/logo/twincloud-logo-mark.svg">
+        <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup.svg" alt="TwinCloud">
+      </picture>
     </div>
     <nav class="header-nav" aria-label="Primary">
       <a class="nav-link" href="#how-it-works">How it Works</a>
