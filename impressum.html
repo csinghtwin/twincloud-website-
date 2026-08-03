@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum — TwinCloud</title>
+<meta name="description" content="Angaben gemäß § 5 TMG / DDG.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Manrope:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #172947;
+    --secondary: #2B85D6;
+    --accent: #1CCF87;
+    --ink: #1F2A33;
+    --mid: #5C6B75;
+    --border: #DDE3E6;
+    --ground: #F7FBFA;
+    --white: #FFFFFF;
+    --blue-300: #54688F;
+    --blue-50: #E6E8EE;
+
+    --font-display: "Plus Jakarta Sans", sans-serif;
+    --font-body: "Manrope", sans-serif;
+
+    --container-max: 1152px;
+    --section-pad-x: 64px;
+    --section-pad-y: 96px;
+  }
+  @media (max-width: 1024px) { :root { --section-pad-x: 40px; } }
+  @media (max-width: 767px) { :root { --section-pad-x: 24px; --section-pad-y: 64px; } }
+  @media (max-width: 480px) { :root { --section-pad-x: 20px; } }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--ground);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, p { margin: 0; }
+  :focus-visible { outline: 2px solid var(--secondary); outline-offset: 2px; }
+
+  /* ==== CTA button — copied verbatim from index.html ==== */
+  .cta-button {
+    position: relative; display: inline-flex; align-items: center; justify-content: center;
+    height: 44px; padding: 0 24px; border: none; border-radius: 20px;
+    background: var(--ink); color: var(--white);
+    font-family: var(--font-body); font-weight: 700; font-size: 16px; line-height: 1.5;
+    overflow: hidden; isolation: isolate; transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .cta-button::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(23, 41, 71, 0), var(--primary));
+    transform: translateX(-100%); transition: transform 0.35s ease; z-index: -1;
+  }
+  .cta-button:hover::before, .cta-button:focus-visible::before { transform: translateX(0); }
+  .cta-button:hover { box-shadow: 0 6px 16px rgba(23, 41, 71, 0.25); }
+  .cta-button:active { transform: scale(0.96); box-shadow: 0 2px 8px rgba(23, 41, 71, 0.2); }
+  .cta-button span { position: relative; }
+
+  /* ==== Site header — copied verbatim from index.html ==== */
+  .site-header { position: fixed; top: 16px; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; padding: 0 54px; }
+  .header-pill {
+    display: flex; align-items: center; justify-content: center; gap: 24px;
+    width: 100%; max-width: var(--container-max); padding: 10px 12px;
+    border-radius: 40px; border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.84); backdrop-filter: blur(12px);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  .header-pill.is-scrolled { box-shadow: 0 8px 24px rgba(23, 41, 71, 0.12); background: rgba(255, 255, 255, 0.96); }
+  .header-brand { display: flex; align-items: center; gap: 3.6px; flex: 1; }
+  .logo-lockup { height: 40px; width: auto; flex-shrink: 0; transition: transform 0.25s ease; }
+  .header-brand:hover .logo-lockup { transform: scale(1.06) rotate(-2deg); }
+  .header-cta { flex-shrink: 0; }
+  @media (max-width: 480px) { .site-header { padding: 0 16px; } }
+
+  /* ==== Shared section rhythm — copied verbatim from index.html ==== */
+  main { flex: 1 0 auto; padding-top: 106px; }
+  .section { padding: 0 var(--section-pad-x) var(--section-pad-y); display: flex; flex-direction: column; align-items: center; }
+  .page-content { width: 100%; max-width: var(--container-max); margin: 0 auto; }
+  .eyebrow { font-family: var(--font-display); font-weight: 500; font-size: 20px; line-height: 30px; color: var(--blue-300); text-align: center; }
+  .page-title {
+    font-family: var(--font-display); font-weight: 800; font-size: 45px; line-height: 1.15;
+    color: var(--ink); text-align: center; margin: 6px 0 40px;
+  }
+  @media (max-width: 767px) { .page-title { font-size: 34px; } }
+
+  /* ---- Impressum content ---- */
+  .imp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 800px; margin: 0 auto 48px; }
+  @media (max-width: 620px) { .imp-grid { grid-template-columns: 1fr; } }
+  .imp-card {
+    background: var(--white); border: 1px solid var(--border); border-radius: 16px;
+    padding: 24px; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .imp-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(23, 41, 71, 0.08); border-color: var(--accent); }
+  .imp-card h2 { font-family: var(--font-body); font-weight: 700; font-size: 18px; color: var(--ink); margin: 0 0 12px; }
+  .imp-card p { color: var(--mid); font-size: 0.95rem; line-height: 1.6; }
+  .imp-card a { color: var(--secondary); }
+  .imp-card a:hover { text-decoration: underline; }
+
+  .imp-note {
+    max-width: 800px; margin: 0 auto; background: var(--white); border: 1px solid var(--border);
+    border-radius: 16px; padding: 20px 24px; font-size: 0.88rem; color: var(--mid); line-height: 1.6;
+  }
+  .imp-note b { color: var(--ink); }
+  .imp-note + .imp-note { margin-top: 16px; }
+
+  /* ==== Footer — copied verbatim from index.html ==== */
+  .site-footer { background: var(--primary); padding: 56px 80px 24px; display: flex; justify-content: center; }
+  .footer-inner { display: flex; flex-direction: column; gap: 35px; width: 100%; max-width: 1120px; }
+  .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .footer-brand { display: flex; align-items: center; gap: 6px; }
+  .footer-brand:hover .logo-lockup { transform: scale(1.06) rotate(-2deg); }
+  .footer-links { display: flex; gap: 36px; flex-wrap: wrap; justify-content: flex-end; }
+  .footer-links a { position: relative; font-family: var(--font-body); font-weight: 700; font-size: 16px; color: var(--blue-50); white-space: nowrap; transition: color 0.2s ease; }
+  .footer-links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -4px; height: 1px; background: var(--accent); transition: right 0.25s ease; }
+  .footer-links a:hover, .footer-links a:focus-visible { color: var(--accent); }
+  .footer-links a:hover::after, .footer-links a:focus-visible::after { right: 0; }
+  .footer-links a.current { color: var(--accent); }
+  .footer-divider { height: 1px; width: 100%; background: rgba(247, 251, 250, 0.15); border: none; }
+  .footer-utility { display: flex; justify-content: flex-end; }
+  .footer-utility p { font-family: var(--font-body); font-weight: 400; font-size: 13px; line-height: 1.5; color: var(--ground); opacity: 0.8; text-align: right; }
+  @media (max-width: 767px) {
+    .site-footer { padding: 40px 24px 20px; }
+    .footer-main { flex-direction: column; align-items: flex-start; }
+    .footer-links { justify-content: flex-start; gap: 20px 28px; }
+    .footer-utility { justify-content: flex-start; }
+    .footer-utility p { text-align: left; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .cta-button::before, .footer-links a::after, .logo-lockup, .imp-card { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-pill">
+    <div class="header-brand">
+      <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup.svg" alt="TwinCloud">
+    </div>
+    <a class="cta-button header-cta" href="index.html#contact"><span>Book a Demo</span></a>
+  </div>
+</header>
+
+<main>
+  <div class="section">
+    <div class="page-content">
+      <p class="eyebrow">Angaben gemäß § 5 TMG / DDG</p>
+      <h1 class="page-title">Impressum</h1>
+
+      <div class="imp-grid">
+        <div class="imp-card">
+          <h2>Adresse</h2>
+          <p>
+            TwinCloud GmbH<br>
+            Baseler Str. 165<br>
+            12205 Berlin<br>
+            Geschäftsführer: Leonhard Thyssen
+          </p>
+        </div>
+        <div class="imp-card">
+          <h2>Handelsregister</h2>
+          <p>
+            VAT: DE461094457<br>
+            HRB 283228 B, Amtsgericht Charlottenburg (Berlin)<br>
+            <a href="mailto:info@twincloud.ai">info@twincloud.ai</a><br>
+            +49 30 40 36 88 94 0
+          </p>
+        </div>
+      </div>
+
+      <div class="imp-note">
+        <b>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:</b> Leonhard Thyssen, Anschrift wie oben.
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup-footer.svg" alt="TwinCloud">
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="index.html#about">About us</a>
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="impressum.html" class="current">Imprint</a>
+      </nav>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-utility">
+      <p>© 2024 TwinCloud. All rights reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var headerPill = document.querySelector('.header-pill');
+  if (headerPill) {
+    window.addEventListener('scroll', function () {
+      headerPill.classList.toggle('is-scrolled', window.scrollY > 8);
+    }, { passive: true });
+  }
+</script>
+</body>
+</html>
