@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — TwinCloud</title>
+<meta name="description" content="TwinCloud privacy policy.">
+<style>
+  /* Self-hosted fonts (not Google's CDN) — avoids sending visitor IPs to Google */
+  @font-face {
+    font-family: "Plus Jakarta Sans";
+    font-style: normal;
+    font-weight: 500 800;
+    font-display: swap;
+    src: url("assets/fonts/plus-jakarta-sans-variable.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url("assets/fonts/manrope-variable.woff2") format("woff2");
+  }
+  :root {
+    --primary: #172947;
+    --secondary: #2B85D6;
+    --accent: #1CCF87;
+    --ink: #1F2A33;
+    --mid: #5C6B75;
+    --border: #DDE3E6;
+    --ground: #F7FBFA;
+    --white: #FFFFFF;
+    --blue-300: #54688F;
+    --blue-50: #E6E8EE;
+
+    --font-display: "Plus Jakarta Sans", sans-serif;
+    --font-body: "Manrope", sans-serif;
+
+    --container-max: 1152px;
+    --section-pad-x: 64px;
+    --section-pad-y: 96px;
+  }
+  @media (max-width: 1024px) { :root { --section-pad-x: 40px; } }
+  @media (max-width: 767px) { :root { --section-pad-x: 24px; --section-pad-y: 64px; } }
+  @media (max-width: 480px) { :root { --section-pad-x: 20px; } }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--ground);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: var(--secondary); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  h1, h2, p { margin: 0; }
+  :focus-visible { outline: 2px solid var(--secondary); outline-offset: 2px; }
+
+  /* ==== CTA button — copied verbatim from index.html ==== */
+  .cta-button {
+    position: relative; display: inline-flex; align-items: center; justify-content: center;
+    height: 44px; padding: 0 24px; border: none; border-radius: 20px;
+    background: var(--ink); color: var(--white);
+    font-family: var(--font-body); font-weight: 700; font-size: 16px; line-height: 1.5;
+    overflow: hidden; isolation: isolate; transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .cta-button::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(23, 41, 71, 0), var(--primary));
+    transform: translateX(-100%); transition: transform 0.35s ease; z-index: -1;
+  }
+  .cta-button:hover::before, .cta-button:focus-visible::before { transform: translateX(0); }
+  .cta-button:hover { box-shadow: 0 6px 16px rgba(23, 41, 71, 0.25); }
+  .cta-button:active { transform: scale(0.96); box-shadow: 0 2px 8px rgba(23, 41, 71, 0.2); }
+  .cta-button span { position: relative; }
+  .cta-button:hover, .cta-button:focus-visible { text-decoration: none; }
+
+  /* ==== Site header — copied verbatim from index.html ==== */
+  .site-header { position: fixed; top: 16px; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; padding: 0 54px; }
+  .header-pill {
+    display: flex; align-items: center; justify-content: center; gap: 24px;
+    width: 100%; max-width: var(--container-max); padding: 10px 12px;
+    border-radius: 40px; border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.84); backdrop-filter: blur(12px);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  .header-pill.is-scrolled { box-shadow: 0 8px 24px rgba(23, 41, 71, 0.12); background: rgba(255, 255, 255, 0.96); }
+  .header-brand { display: flex; align-items: center; gap: 3.6px; flex: 1; }
+  .logo-lockup { height: 40px; width: auto; flex-shrink: 0; transition: transform 0.25s ease; }
+  .header-brand .logo-lockup { height: 36px; padding: 0 4px; }
+  .header-brand:hover .logo-lockup { transform: scale(1.06) rotate(-2deg); }
+  .header-cta { flex-shrink: 0; }
+  @media (max-width: 480px) { .site-header { padding: 0 16px; } }
+
+  /* ==== Shared section rhythm — copied verbatim from index.html ==== */
+  main { flex: 1 0 auto; padding-top: 106px; }
+  .section { padding: 0 var(--section-pad-x) var(--section-pad-y); display: flex; flex-direction: column; align-items: center; }
+  .eyebrow { font-family: var(--font-display); font-weight: 500; font-size: 20px; line-height: 30px; color: var(--blue-300); text-align: center; }
+  .page-title {
+    font-family: var(--font-display); font-weight: 800; font-size: 45px; line-height: 1.15;
+    color: var(--ink); text-align: center; margin: 6px 0 8px;
+  }
+  @media (max-width: 767px) { .page-title { font-size: 34px; } }
+  .updated-note { text-align: center; color: var(--mid); font-size: 0.9rem; margin: 0 0 40px; }
+
+  /* ---- Policy content ---- */
+  .policy-content {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  @media (max-width: 620px) { .policy-content { padding: 28px 20px; } }
+  .policy-section h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+  .policy-section p {
+    color: var(--mid);
+    font-size: 0.96rem;
+    line-height: 1.7;
+    margin: 0 0 10px;
+  }
+  .policy-section p:last-child { margin-bottom: 0; }
+  .policy-section .addr { color: var(--ink); }
+
+  /* ==== Footer — copied verbatim from index.html ==== */
+  .site-footer { background: var(--primary); padding: 56px 80px 24px; display: flex; justify-content: center; }
+  .footer-inner { display: flex; flex-direction: column; gap: 35px; width: 100%; max-width: 1120px; }
+  .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .footer-brand { display: flex; align-items: center; gap: 6px; }
+  .footer-brand:hover .logo-lockup { transform: scale(1.06) rotate(-2deg); }
+  .footer-links { display: flex; gap: 36px; flex-wrap: wrap; justify-content: flex-end; }
+  .footer-links a { position: relative; font-family: var(--font-body); font-weight: 700; font-size: 16px; color: var(--blue-50); white-space: nowrap; transition: color 0.2s ease; }
+  .footer-links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -4px; height: 1px; background: var(--accent); transition: right 0.25s ease; }
+  .footer-links a:hover, .footer-links a:focus-visible { color: var(--accent); text-decoration: none; }
+  .footer-links a:hover::after, .footer-links a:focus-visible::after { right: 0; }
+  .footer-links a.current { color: var(--accent); }
+  .footer-divider { height: 1px; width: 100%; background: rgba(247, 251, 250, 0.15); border: none; }
+  .footer-utility { display: flex; justify-content: flex-end; }
+  .footer-utility p { font-family: var(--font-body); font-weight: 400; font-size: 13px; line-height: 1.5; color: var(--ground); opacity: 0.8; text-align: right; }
+  @media (max-width: 767px) {
+    .site-footer { padding: 40px 24px 20px; }
+    .footer-main { flex-direction: column; align-items: center; text-align: center; }
+    .footer-links { justify-content: center; gap: 20px 28px; }
+    .footer-utility { justify-content: center; }
+    .footer-utility p { text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .cta-button::before, .footer-links a::after, .logo-lockup { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-pill">
+    <a class="header-brand" href="index.html" aria-label="TwinCloud home">
+      <picture>
+        <source media="(max-width: 767px)" srcset="assets/logo/twincloud-logo-mark.svg">
+        <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup.svg" alt="TwinCloud">
+      </picture>
+    </a>
+    <a class="cta-button header-cta" href="index.html#contact"><span>Book a Demo</span></a>
+  </div>
+</header>
+
+<main>
+  <div class="section">
+    <p class="eyebrow">Legal</p>
+    <h1 class="page-title">Privacy Policy</h1>
+    <p class="updated-note">Last updated: April 2, 2025</p>
+
+    <div class="policy-content">
+      <div class="policy-section">
+        <h2>1. General Information</h2>
+        <p>We are pleased that you are using the TwinCloud app (hereinafter referred to as "App"). The protection of your personal data is our top priority. In this privacy policy, we inform you about what data we collect, how we use it, and what rights you have regarding your data.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>2. Contact Details of the Data Controller</h2>
+        <p class="addr">TwinCloud GmbH<br>Baseler Str. 165, 12205 Berlin<br>Email: <a href="mailto:info@twincloud.ai">info@twincloud.ai</a></p>
+        <p>Since our company is currently not required to appoint a data protection officer in accordance with Article 37 of the GDPR, we have not appointed an internal data protection officer. However, we are happy to answer any questions you may have regarding data protection.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>3. Collection and Processing of Personal Data</h2>
+        <p><strong>a) Automatic Collection (Usage Data):</strong> Each time you use the App, certain data may be collected automatically, e.g., device information, IP address, operating system version, and timestamp of access. This data is only collected to the extent necessary for the technical operation, security, and stability of the App.</p>
+        <p><strong>b) Voluntary Information:</strong> If you register in the app or contact us (e.g., via email), we collect the contact details and content you provide in order to process your request.</p>
+        <p><strong>c) Access and Permissions (e.g., Camera, Location, Storage):</strong> The TwinCloud app may request access permissions to certain functions of your device, such as the camera, storage, or location, if necessary. Camera: Used for the augmented reality function or for uploading photos. Location: Used only when you use certain location-based functions (if offered). Storage: May be used for importing/exporting data and for saving documents or images within the app context. You can revoke or change these permissions at any time in your device settings. However, please note that this may limit the app's functionality.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>4. Purposes of Use</h2>
+        <p>We use your personal data exclusively for the following purposes: Operation and improvement of the app functions. Processing of user inquiries and customer service. Technical security and maintenance (e.g., error detection, stability measurement). Compliance with legal obligations.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>5. Location of Data Processing and Transfer</h2>
+        <p><strong>Server location:</strong> We generally process data in Germany or the European Union.</p>
+        <p><strong>Use of service providers:</strong> Where necessary, we use external service providers (e.g., hosting providers, technical service providers). These providers are contractually obligated to comply with applicable data protection regulations.</p>
+        <p><strong>Transfers to third countries:</strong> These only occur if an adequate level of data protection exists for the third country in question (adequacy decision of the EU Commission) or suitable safeguards exist (e.g., standard contractual clauses).</p>
+        <p><strong>Official inquiries:</strong> We only disclose personal data to authorities or other third parties if we are legally obligated to do so or if this is necessary for the establishment, exercise, or defense of legal claims.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>6. Data Security</h2>
+        <p>We take appropriate technical and organizational measures to protect your personal data from unauthorized access or misuse. This includes, among other things, the encryption of sensitive data and regular security audits. However, please note that absolute security cannot be guaranteed for data transmissions on the internet.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>7. Data Retention Period</h2>
+        <p>We store your personal data only for as long as is necessary to fulfill the purposes mentioned above or as long as we are legally obligated to do so (e.g., under commercial or tax law). Afterwards, the data will be deleted or its processing restricted.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>8. Your Rights</h2>
+        <p>As a data subject (within the meaning of the GDPR), you have the right at any time to:</p>
+        <p>Request information about your processed personal data (Art. 15 GDPR). Request the rectification of inaccurate data or the completion of incomplete data (Art. 16 GDPR). Request the erasure ("right to be forgotten") of your data, provided there are no legal obligations to retain it (Art. 17 GDPR). Request the restriction of processing, provided the legal requirements are met (Art. 18 GDPR). Object to the processing of your personal data on grounds relating to your particular situation (Art. 21 GDPR). Receive your data in a commonly used, machine-readable format, provided the processing is based on your consent or a contract (Art. 20 GDPR). Revoke your consent at any time with effect for the future (Art. 7 para. 3 GDPR).</p>
+        <p>To exercise your rights, please send an email to <a href="mailto:datenschutz@twincloud.com">datenschutz@twincloud.com</a> or contact us in writing at the address above.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>9. Changes to the Privacy Policy</h2>
+        <p>Changes in legislation or adjustments to our app functions may necessitate changes to this privacy policy. The current version is available via the link in our app store listing and on our website. Please check this policy regularly.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>10. Use of the TwinCloud App</h2>
+        <p><strong>Target Group and Operating Systems:</strong> The TwinCloud app is designed for users who require various cloud functions (e.g., file management, synchronization, and potentially augmented reality features). We currently offer the app primarily for Android (version X and later) and iOS (version Y and later).</p>
+        <p><strong>Download and Installation:</strong> When downloading from the respective app store, certain information may be transmitted to the app store operator (Google, Apple) (e.g., username, customer number, payment information). We have no control over this. Please refer to the respective app store's privacy policy for further information.</p>
+        <p><strong>Functions and Permissions:</strong> Depending on its functionality, the app will request certain access permissions (e.g., camera, location, storage) upon first launch (or during operation) to provide all features.</p>
+        <p><strong>App Licensing:</strong> To verify the license, data (device type, operating system, app version, license information) may be transmitted to our servers. No personal profiling takes place.</p>
+        <p><strong>Hyperlinks to Other Websites:</strong> The app may contain links to external websites. We have no control over the data processing carried out there. Please refer to the respective privacy policies of the linked sites.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>11. Deleting the App</h2>
+        <p>You can uninstall the TwinCloud app from your smartphone/tablet at any time. Depending on your operating system, you should also delete locally stored data, backups, or cached content if you no longer wish to retain it.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>12. Right to Object</h2>
+        <p>Pursuant to Article 21 GDPR, you have the right to object, on grounds relating to your particular situation, at any time to the processing of your personal data where this processing is based on Article 6(1)(e) (performance of a task carried out in the public interest) or Article 6(1)(f) (legitimate interests) GDPR. In the event of an objection, we will no longer process your personal data unless we can demonstrate compelling legitimate grounds for the processing which override your interests, rights and freedoms, or the processing serves the purpose of establishing, exercising or defending legal claims.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup-footer.svg" alt="TwinCloud">
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="index.html#about">About us</a>
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="privacy-policy.html" class="current">Privacy Policy</a>
+        <a href="https://cdn.prod.website-files.com/62fe59fa4af2991c1d18512c/63177f09064a37c241caabb8_roometric%20AGBs.pdf" target="_blank" rel="noopener">Data Protection</a>
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="impressum.html">Imprint</a>
+      </nav>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-utility">
+      <p>© 2024 TwinCloud. All rights reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var headerPill = document.querySelector('.header-pill');
+  if (headerPill) {
+    window.addEventListener('scroll', function () {
+      headerPill.classList.toggle('is-scrolled', window.scrollY > 8);
+    }, { passive: true });
+  }
+</script>
+</body>
+</html>

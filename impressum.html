@@ -5,10 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Impressum — TwinCloud</title>
 <meta name="description" content="Angaben gemäß § 5 TMG / DDG.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Manrope:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
+  /* Self-hosted fonts (not Google's CDN) — avoids sending visitor IPs to Google */
+  @font-face {
+    font-family: "Plus Jakarta Sans";
+    font-style: normal;
+    font-weight: 500 800;
+    font-display: swap;
+    src: url("assets/fonts/plus-jakarta-sans-variable.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url("assets/fonts/manrope-variable.woff2") format("woff2");
+  }
   :root {
     --primary: #172947;
     --secondary: #2B85D6;
@@ -79,8 +91,8 @@
   }
   .header-pill.is-scrolled { box-shadow: 0 8px 24px rgba(23, 41, 71, 0.12); background: rgba(255, 255, 255, 0.96); }
   .header-brand { display: flex; align-items: center; gap: 3.6px; flex: 1; }
-  .logo-lockup { height: 40px; width: auto; flex-shrink: 0; transition: transform 0.25s ease; }
-  .header-brand:hover .logo-lockup { transform: scale(1.06) rotate(-2deg); }
+  .logo-lockup { height: 40px; width: auto; flex-shrink: 0; }
+  .header-brand .logo-lockup { height: 36px; padding: 0 4px; }
   .header-cta { flex-shrink: 0; }
   @media (max-width: 480px) { .site-header { padding: 0 16px; } }
 
@@ -148,9 +160,9 @@
 
 <header class="site-header">
   <div class="header-pill">
-    <div class="header-brand">
+    <a class="header-brand" href="index.html" aria-label="TwinCloud home">
       <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup.svg" alt="TwinCloud">
-    </div>
+    </a>
     <a class="cta-button header-cta" href="index.html#contact"><span>Book a Demo</span></a>
   </div>
 </header>
@@ -198,7 +210,8 @@
       <nav class="footer-links" aria-label="Footer">
         <a href="index.html#about">About us</a>
         <a href="index.html#how-it-works">How it works</a>
-        <a href="#">Privacy Policy</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="https://cdn.prod.website-files.com/62fe59fa4af2991c1d18512c/63177f09064a37c241caabb8_roometric%20AGBs.pdf" target="_blank" rel="noopener">Data Protection</a>
         <a href="#">Terms &amp; Conditions</a>
         <a href="impressum.html" class="current">Imprint</a>
       </nav>
