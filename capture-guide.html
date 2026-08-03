@@ -162,8 +162,7 @@
   }
   .header-pill.is-scrolled { box-shadow: 0 8px 24px rgba(23, 41, 71, 0.12); background: rgba(255, 255, 255, 0.96); }
   .header-brand { display: flex; align-items: center; gap: 3.6px; flex: 1; }
-  .logo-lockup { height: 40px; width: auto; flex-shrink: 0; transition: transform 0.25s ease; }
-  .header-brand:hover .logo-lockup { transform: scale(1.06) rotate(-2deg); }
+  .logo-lockup { height: 40px; width: auto; flex-shrink: 0; }
   .header-cta { flex-shrink: 0; }
 
   @media (max-width: 480px) { .site-header { padding: 0 16px; } }
@@ -378,9 +377,9 @@
 
 <header class="site-header">
   <div class="header-pill">
-    <div class="header-brand">
+    <a class="header-brand" href="index.html" aria-label="TwinCloud home">
       <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup.svg" alt="TwinCloud">
-    </div>
+    </a>
     <a class="cta-button header-cta" href="index.html#contact"><span>Need help? Book a call</span></a>
   </div>
 </header>
