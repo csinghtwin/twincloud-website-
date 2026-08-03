@@ -153,7 +153,8 @@
     flex-shrink: 0;
   }
   .header-brand .logo-lockup {
-    height: 42px;
+    height: 38px;
+    padding: 0 4px;
   }
   .header-nav {
     display: flex;
@@ -197,7 +198,7 @@
       backdrop-filter: none;
       padding: 14px 20px;
     }
-    .header-brand .logo-lockup { height: 30px; }
+    .header-brand .logo-lockup { height: 27px; }
   }
 
   /* ---- Hero ---- */
@@ -362,6 +363,7 @@
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: 16px;
+    cursor: pointer;
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, opacity 0.3s ease;
   }
   .step-card:hover {
@@ -808,9 +810,6 @@
     align-items: center;
     gap: 6px;
   }
-  .footer-brand .logo-lockup {
-    filter: brightness(0) invert(1);
-  }
   .footer-brand:hover .logo-lockup { transform: scale(1.06) rotate(-2deg); }
   .footer-links {
     display: flex;
@@ -957,20 +956,6 @@
     </div>
   </div>
 </div>
-<script>
-  (function () {
-    var KEY = 'tc-cookie-consent';
-    var banner = document.getElementById('cookie-banner');
-    if (!banner) return;
-    if (!localStorage.getItem(KEY)) banner.classList.add('visible');
-    function setConsent(value) {
-      localStorage.setItem(KEY, value);
-      banner.classList.remove('visible');
-    }
-    document.getElementById('cookie-accept').addEventListener('click', function () { setConsent('accepted'); });
-    document.getElementById('cookie-reject').addEventListener('click', function () { setConsent('rejected'); });
-  })();
-</script>
 
 <header class="site-header">
   <div class="header-pill">
@@ -1010,7 +995,7 @@
       <h2 class="section-title">From video to decision ready data.</h2>
     </div>
     <div class="how-it-works-grid">
-      <video class="video-placeholder" id="how-it-works-video" src="assets/images/New final.mp4" autoplay muted loop playsinline aria-label="TwinCloud filming-to-data workflow demo"></video>
+      <video class="video-placeholder" id="how-it-works-video" src="assets/images/HIW_1.mp4" autoplay muted playsinline aria-label="TwinCloud filming-to-data workflow demo"></video>
       <div class="steps">
         <div class="step-card">
           <div class="step-top">
@@ -1194,8 +1179,7 @@
       <h2 class="contact-heading">Every building <span class="navy">measured </span>is a building you can decarbonize.</h2>
       <div class="contact-shot">
         <div class="cal-consent" id="cal-consent">
-          <p class="cal-consent-text">Clicking below loads the booking calendar from <strong>Cal.com</strong>, an external service. This may set cookies and share data with Cal.com — see our Privacy Policy.</p>
-          <button class="cta-button" id="cal-consent-btn" type="button"><span>Load booking calendar</span></button>
+          <p class="cal-consent-text" id="cal-consent-text"></p>
         </div>
         <!-- Cal inline embed code begins -->
         <div style="width:100%;height:100%;overflow:scroll;display:none" id="my-cal-inline-30min"></div>
@@ -1204,33 +1188,13 @@
     </div>
   </section>
 
-  <script type="text/javascript">
-    document.getElementById('cal-consent-btn').addEventListener('click', function () {
-      document.getElementById('cal-consent').style.display = 'none';
-      document.getElementById('my-cal-inline-30min').style.display = 'block';
-
-      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-      Cal("init", "30min", {origin:"https://app.cal.com"});
-      Cal.config = Cal.config || {};
-      Cal.config.forwardQueryParams = true;
-
-      Cal.ns["30min"]("inline", {
-        elementOrSelector:"#my-cal-inline-30min",
-        config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
-        calLink: "leonhard-thyssen-5se0ie/30min",
-      });
-
-      Cal.ns["30min"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
-    });
-  </script>
-
 </main>
 
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-main">
       <div class="footer-brand">
-        <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup.svg" alt="TwinCloud">
+        <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup-footer.svg" alt="TwinCloud">
       </div>
       <nav class="footer-links" aria-label="Footer">
         <a href="#about">About us</a>
@@ -1258,25 +1222,108 @@
     return;
   }
 
-  if (howItWorksVideo && bars.length) {
-    var segLen = 21 / bars.length;
-    var syncSegLen = function () {
-      if (howItWorksVideo.duration) segLen = howItWorksVideo.duration / bars.length;
+  var stepCards = document.querySelectorAll('.step-card');
+
+  if (howItWorksVideo && bars.length && stepCards.length) {
+    var clips = ['assets/images/HIW_1.mp4', 'assets/images/HIW_2.mp4', 'assets/images/HIW_3.mp4'];
+    var activeIndex = 0;
+
+    var playClip = function (index) {
+      activeIndex = index;
+      bars.forEach(function (bar) { bar.style.transform = 'scaleX(0)'; });
+      howItWorksVideo.src = clips[index];
+      howItWorksVideo.load();
+      howItWorksVideo.play();
     };
-    howItWorksVideo.addEventListener('loadedmetadata', syncSegLen);
-    syncSegLen();
+
+    howItWorksVideo.addEventListener('ended', function () {
+      playClip((activeIndex + 1) % clips.length);
+    });
+
+    stepCards.forEach(function (card, i) {
+      card.addEventListener('click', function () {
+        if (i !== activeIndex) playClip(i);
+      });
+    });
 
     var tick = function () {
       var t = howItWorksVideo.currentTime;
+      var d = howItWorksVideo.duration || 1;
       bars.forEach(function (bar, i) {
-        var localT = t - i * segLen;
-        var progress = (localT >= 0 && localT < segLen) ? (localT / segLen) : 0;
-        bar.style.transform = 'scaleX(' + progress + ')';
+        bar.style.transform = 'scaleX(' + (i === activeIndex ? Math.min(1, t / d) : 0) + ')';
       });
       requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
   }
+})();
+</script>
+
+<script>
+(function () {
+  var KEY = 'tc-cookie-consent';
+  var banner = document.getElementById('cookie-banner');
+  var calConsent = document.getElementById('cal-consent');
+  var calText = document.getElementById('cal-consent-text');
+  var calFrame = document.getElementById('my-cal-inline-30min');
+  var calLoaded = false;
+
+  function loadCalEmbed() {
+    if (calLoaded) return;
+    calLoaded = true;
+    calConsent.style.display = 'none';
+    calFrame.style.display = 'block';
+
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", "30min", {origin:"https://app.cal.com"});
+    Cal.config = Cal.config || {};
+    Cal.config.forwardQueryParams = true;
+
+    Cal.ns["30min"]("inline", {
+      elementOrSelector:"#my-cal-inline-30min",
+      config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
+      calLink: "leonhard-thyssen-5se0ie/30min",
+    });
+
+    Cal.ns["30min"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+  }
+
+  function updateCalSection(value) {
+    if (!calConsent || !calText) return;
+    if (value === 'accepted') {
+      loadCalEmbed();
+    } else if (value === 'rejected') {
+      calConsent.style.display = 'flex';
+      calText.innerHTML = 'You rejected optional cookies, so the booking calendar from <strong>Cal.com</strong> is disabled. <a href="#" id="cal-reopen-banner">Change your cookie choice</a> to enable it.';
+      var reopenLink = document.getElementById('cal-reopen-banner');
+      if (reopenLink && banner) {
+        reopenLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          banner.classList.add('visible');
+          banner.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        });
+      }
+    } else {
+      calConsent.style.display = 'flex';
+      calText.innerHTML = 'Accept cookies below to enable the booking calendar from <strong>Cal.com</strong>, an external service that may set cookies and share data with Cal.com — see our Privacy Policy.';
+    }
+  }
+
+  function setConsent(value) {
+    localStorage.setItem(KEY, value);
+    if (banner) banner.classList.remove('visible');
+    updateCalSection(value);
+  }
+
+  if (banner) {
+    if (!localStorage.getItem(KEY)) banner.classList.add('visible');
+    var acceptBtn = document.getElementById('cookie-accept');
+    var rejectBtn = document.getElementById('cookie-reject');
+    if (acceptBtn) acceptBtn.addEventListener('click', function () { setConsent('accepted'); });
+    if (rejectBtn) rejectBtn.addEventListener('click', function () { setConsent('rejected'); });
+  }
+
+  updateCalSection(localStorage.getItem(KEY));
 })();
 </script>
 
