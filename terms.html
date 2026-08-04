@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Allgemeine Geschäftsbedingungen — TwinCloud</title>
 <meta name="description" content="Allgemeine Geschäftsbedingungen (AGB) der TwinCloud GmbH.">
+<link rel="stylesheet" href="assets/css/cookie-banner.css">
 <style>
   /* Self-hosted fonts (not Google's CDN) — avoids sending visitor IPs to Google */
   @font-face {
@@ -93,10 +94,22 @@
   }
   .header-pill.is-scrolled { box-shadow: 0 8px 24px rgba(23, 41, 71, 0.12); background: rgba(255, 255, 255, 0.96); }
   .header-brand { display: flex; align-items: center; gap: 3.6px; flex: 1; }
-  .logo-lockup { height: 40px; width: auto; flex-shrink: 0; transition: transform 0.25s ease; }
-  .header-brand:hover .logo-lockup { transform: scale(1.06) rotate(-2deg); }
+  .logo-lockup { height: 40px; width: auto; flex-shrink: 0; }
+  .header-brand .logo-lockup { height: 38px; padding: 0 4px; }
   .header-cta { flex-shrink: 0; }
-  @media (max-width: 480px) { .site-header { padding: 0 16px; } }
+  @media (max-width: 767px) {
+    .site-header { top: 0; padding: 0; }
+    .header-pill {
+      max-width: 100%;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+      backdrop-filter: none;
+      padding: 14px 20px;
+    }
+    .header-brand .logo-lockup { height: 27px; }
+  }
 
   /* ==== Shared section rhythm — copied verbatim from index.html ==== */
   main { flex: 1 0 auto; padding-top: 106px; }
@@ -135,7 +148,6 @@
   .footer-inner { display: flex; flex-direction: column; gap: 35px; width: 100%; max-width: 1120px; }
   .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
   .footer-brand { display: flex; align-items: center; gap: 6px; }
-  .footer-brand:hover .logo-lockup { transform: scale(1.06) rotate(-2deg); }
   .footer-links { display: flex; gap: 36px; flex-wrap: wrap; justify-content: flex-end; }
   .footer-links a { position: relative; font-family: var(--font-body); font-weight: 700; font-size: 16px; color: var(--blue-50); white-space: nowrap; transition: color 0.2s ease; }
   .footer-links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -4px; height: 1px; background: var(--accent); transition: right 0.25s ease; }
@@ -161,11 +173,49 @@
 </head>
 <body>
 
+<div class="cookie-banner" id="cookie-banner">
+  <div class="cookie-banner-inner">
+    <div class="cookie-banner-main">
+      <p class="cookie-banner-text">We use optional cookies for our booking calendar and analytics. Read our <a href="privacy-policy.html">privacy policy</a> or <a href="#" id="cookie-customize-btn">manage cookies</a>.</p>
+      <div class="cookie-banner-actions">
+        <button class="cta-button secondary" id="cookie-reject" type="button"><span>Reject All</span></button>
+        <button class="cta-button" id="cookie-accept" type="button"><span>Accept All</span></button>
+      </div>
+    </div>
+    <div class="cookie-customize" id="cookie-customize-panel" hidden>
+      <div class="cookie-toggle-row">
+        <div class="cookie-toggle-copy">
+          <strong>Functional</strong>
+          <span>Cal.com booking calendar</span>
+        </div>
+        <label class="cookie-toggle-switch">
+          <input type="checkbox" id="toggle-functional">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-toggle-row">
+        <div class="cookie-toggle-copy">
+          <strong>Analytics</strong>
+          <span>Google Analytics, to understand site usage</span>
+        </div>
+        <label class="cookie-toggle-switch">
+          <input type="checkbox" id="toggle-analytics">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-customize-actions">
+        <button class="cta-button" id="cookie-save-preferences" type="button"><span>Save preferences</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/consent.js"></script>
+
 <header class="site-header">
   <div class="header-pill">
-    <div class="header-brand">
+    <a class="header-brand" href="index.html" aria-label="TwinCloud home">
       <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup.svg" alt="TwinCloud">
-    </div>
+    </a>
     <a class="cta-button header-cta" href="index.html#contact"><span>Book a Demo</span></a>
   </div>
 </header>
@@ -263,8 +313,6 @@
         <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup-footer.svg" alt="TwinCloud">
       </div>
       <nav class="footer-links" aria-label="Footer">
-        <a href="index.html#about">About us</a>
-        <a href="index.html#how-it-works">How it works</a>
         <a href="privacy-policy.html">Privacy Policy</a>
         <a href="terms.html" class="current">Terms &amp; Conditions</a>
         <a href="impressum.html">Imprint</a>
