@@ -87,7 +87,8 @@
     if (rejectBtn) rejectBtn.addEventListener('click', function () {
       decide({ functional: false, analytics: false });
     });
-    if (customizeBtn) customizeBtn.addEventListener('click', function () {
+    if (customizeBtn) customizeBtn.addEventListener('click', function (e) {
+      e.preventDefault();
       if (customizePanel) customizePanel.hidden = !customizePanel.hidden;
     });
     if (saveBtn) saveBtn.addEventListener('click', function () {
