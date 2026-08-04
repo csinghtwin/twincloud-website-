@@ -1215,6 +1215,21 @@
   if (howItWorksVideo && bars.length && stepCards.length) {
     var clips = ['assets/images/HIW_1.mp4', 'assets/images/HIW_2.mp4', 'assets/images/HIW_3.mp4'];
     var activeIndex = 0;
+    var preloaded = [];
+
+    function preloadClip(index) {
+      if (preloaded[index]) return;
+      var v = document.createElement('video');
+      v.preload = 'auto';
+      v.muted = true;
+      v.src = clips[index];
+      v.load();
+      preloaded[index] = v;
+    }
+
+    // Warm the browser's cache for the other clips while the current one plays,
+    // so switching later doesn't have to wait on a fresh multi-MB fetch.
+    clips.forEach(function (_, i) { if (i !== 0) preloadClip(i); });
 
     var playClip = function (index) {
       activeIndex = index;
@@ -1222,6 +1237,7 @@
       howItWorksVideo.src = clips[index];
       howItWorksVideo.load();
       howItWorksVideo.play();
+      preloadClip((index + 1) % clips.length);
     };
 
     howItWorksVideo.addEventListener('ended', function () {
