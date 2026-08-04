@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TwinCloud — Digital Twins from videos.</title>
 <meta name="description" content="Film a building. Get a measurable 3D twin. TwinCloud turns a single walkthrough video into decarbonization-ready building data.">
+<link rel="stylesheet" href="assets/css/cookie-banner.css">
 <style>
   /* Self-hosted fonts (not Google's CDN) — avoids sending visitor IPs to Google */
   @font-face {
@@ -867,47 +868,6 @@
     .footer-utility p { text-align: center; }
   }
 
-  /* ---- Cookie banner ---- */
-  .cta-button.secondary { background: var(--white); color: var(--ink); border: 1px solid var(--border); }
-  .cta-button.secondary::before { display: none; }
-  .cta-button.secondary:hover { border-color: var(--accent); box-shadow: none; }
-  .cookie-banner {
-    display: none;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 200;
-    background: var(--white);
-    border-top: 1px solid var(--border);
-    box-shadow: 0 -8px 24px rgba(23, 41, 71, 0.08);
-    padding: 20px 24px;
-  }
-  .cookie-banner.visible { display: block; }
-  .cookie-banner-inner {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  .cookie-banner-text {
-    flex: 1 1 320px;
-    font-family: var(--font-body);
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--mid);
-  }
-  .cookie-banner-text a { color: var(--primary); font-weight: 700; text-decoration: underline; }
-  .cookie-banner-actions { display: flex; gap: 12px; flex-shrink: 0; }
-  .cookie-banner-actions .cta-button { width: auto; padding: 0 24px; justify-content: center; white-space: nowrap; }
-  @media (max-width: 600px) {
-    .cookie-banner { padding: 16px 20px; }
-    .cookie-banner-inner { flex-direction: column; align-items: stretch; }
-    .cookie-banner-actions .cta-button { flex: 1; width: auto; white-space: nowrap; }
-  }
 
   /* ---- Scroll reveal ---- */
   .reveal {
@@ -951,13 +911,42 @@
 
 <div class="cookie-banner" id="cookie-banner">
   <div class="cookie-banner-inner">
-    <p class="cookie-banner-text">We only load optional features, like our booking calendar, after you choose to. Nothing else is tracked. See our <a href="privacy-policy.html">Privacy Policy</a>.</p>
-    <div class="cookie-banner-actions">
-      <button class="cta-button secondary" id="cookie-reject" type="button"><span>Reject</span></button>
-      <button class="cta-button" id="cookie-accept" type="button"><span>Accept</span></button>
+    <div class="cookie-banner-main">
+      <p class="cookie-banner-text">We use optional cookies for two things: our booking calendar (Cal.com) and understanding site usage (Google Analytics). Nothing loads until you choose. See our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+      <div class="cookie-banner-actions">
+        <button class="cta-button secondary" id="cookie-customize-btn" type="button"><span>Customize</span></button>
+        <button class="cta-button secondary" id="cookie-reject" type="button"><span>Reject All</span></button>
+        <button class="cta-button" id="cookie-accept" type="button"><span>Accept All</span></button>
+      </div>
+    </div>
+    <div class="cookie-customize" id="cookie-customize-panel" hidden>
+      <div class="cookie-toggle-row">
+        <div class="cookie-toggle-copy">
+          <strong>Functional</strong>
+          <span>Cal.com booking calendar</span>
+        </div>
+        <label class="cookie-toggle-switch">
+          <input type="checkbox" id="toggle-functional">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-toggle-row">
+        <div class="cookie-toggle-copy">
+          <strong>Analytics</strong>
+          <span>Google Analytics, to understand site usage</span>
+        </div>
+        <label class="cookie-toggle-switch">
+          <input type="checkbox" id="toggle-analytics">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-customize-actions">
+        <button class="cta-button" id="cookie-save-preferences" type="button"><span>Save preferences</span></button>
+      </div>
     </div>
   </div>
 </div>
+<script src="assets/js/consent.js"></script>
 
 <header class="site-header">
   <div class="header-pill">
@@ -1202,8 +1191,7 @@
         <a href="#about">About us</a>
         <a href="#how-it-works">How it works</a>
         <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="https://cdn.prod.website-files.com/62fe59fa4af2991c1d18512c/63177f09064a37c241caabb8_roometric%20AGBs.pdf" target="_blank" rel="noopener">Data Protection</a>
-        <a href="#">Terms &amp; Conditions</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
         <a href="impressum.html">Imprint</a>
       </nav>
     </div>
@@ -1264,8 +1252,6 @@
 
 <script>
 (function () {
-  var KEY = 'tc-cookie-consent';
-  var banner = document.getElementById('cookie-banner');
   var calConsent = document.getElementById('cal-consent');
   var calText = document.getElementById('cal-consent-text');
   var calFrame = document.getElementById('my-cal-inline-30min');
@@ -1291,19 +1277,18 @@
     Cal.ns["30min"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
   }
 
-  function updateCalSection(value) {
+  function updateCalSection(consent) {
     if (!calConsent || !calText) return;
-    if (value === 'accepted') {
+    if (consent && consent.functional) {
       loadCalEmbed();
-    } else if (value === 'rejected') {
+    } else if (consent) {
       calConsent.style.display = 'flex';
-      calText.innerHTML = 'You rejected optional cookies, so the booking calendar from <strong>Cal.com</strong> is disabled. <a href="#" id="cal-reopen-banner">Change your cookie choice</a> to enable it.';
+      calText.innerHTML = 'You turned off functional cookies, so the booking calendar from <strong>Cal.com</strong> is disabled. <a href="#" id="cal-reopen-banner">Change your cookie choice</a> to enable it.';
       var reopenLink = document.getElementById('cal-reopen-banner');
-      if (reopenLink && banner) {
+      if (reopenLink) {
         reopenLink.addEventListener('click', function (e) {
           e.preventDefault();
-          banner.classList.add('visible');
-          banner.scrollIntoView({ behavior: 'smooth', block: 'end' });
+          window.tcReopenBanner();
         });
       }
     } else {
@@ -1312,21 +1297,8 @@
     }
   }
 
-  function setConsent(value) {
-    localStorage.setItem(KEY, value);
-    if (banner) banner.classList.remove('visible');
-    updateCalSection(value);
-  }
-
-  if (banner) {
-    if (!localStorage.getItem(KEY)) banner.classList.add('visible');
-    var acceptBtn = document.getElementById('cookie-accept');
-    var rejectBtn = document.getElementById('cookie-reject');
-    if (acceptBtn) acceptBtn.addEventListener('click', function () { setConsent('accepted'); });
-    if (rejectBtn) rejectBtn.addEventListener('click', function () { setConsent('rejected'); });
-  }
-
-  updateCalSection(localStorage.getItem(KEY));
+  document.addEventListener('tc-consent-updated', function (e) { updateCalSection(e.detail); });
+  document.addEventListener('DOMContentLoaded', function () { updateCalSection(window.tcConsent.get()); });
 })();
 </script>
 

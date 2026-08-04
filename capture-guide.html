@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>360° Capture Guide — TwinCloud</title>
 <meta name="description" content="Field guide for capturing a 360° walkthrough scan with the DJI Osmo 360 — setup, technique, and per-scene recipes.">
+<link rel="stylesheet" href="assets/css/cookie-banner.css">
 <style>
   /* Self-hosted fonts (not Google's CDN) — avoids sending visitor IPs to Google */
   @font-face {
@@ -354,43 +355,6 @@
     .footer-utility p { text-align: left; }
   }
 
-  /* ---- Cookie banner ---- */
-  .cookie-banner {
-    display: none;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 200;
-    background: var(--white);
-    border-top: 1px solid var(--border);
-    box-shadow: 0 -8px 24px rgba(23, 41, 71, 0.08);
-    padding: 20px 24px;
-  }
-  .cookie-banner.visible { display: block; }
-  .cookie-banner-inner {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  .cookie-banner-text {
-    flex: 1 1 320px;
-    font-family: var(--font-body);
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--mid);
-  }
-  .cookie-banner-text a { color: var(--primary); font-weight: 700; text-decoration: underline; }
-  .cookie-banner-actions { display: flex; gap: 12px; flex-shrink: 0; }
-  @media (max-width: 600px) {
-    .cookie-banner { padding: 16px 20px; }
-    .cookie-banner-inner { flex-direction: column; align-items: stretch; }
-    .cookie-banner-actions .cta-button { flex: 1; width: auto; white-space: nowrap; }
-  }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -416,27 +380,42 @@
 
 <div class="cookie-banner" id="cookie-banner">
   <div class="cookie-banner-inner">
-    <p class="cookie-banner-text">We only load optional features, like our booking calendar, after you choose to. Nothing else is tracked. See our <a href="privacy-policy.html">Privacy Policy</a>.</p>
-    <div class="cookie-banner-actions">
-      <button class="cta-button secondary" id="cookie-reject" type="button"><span>Reject</span></button>
-      <button class="cta-button" id="cookie-accept" type="button"><span>Accept</span></button>
+    <div class="cookie-banner-main">
+      <p class="cookie-banner-text">We use optional cookies for two things: our booking calendar (Cal.com) and understanding site usage (Google Analytics). Nothing loads until you choose. See our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+      <div class="cookie-banner-actions">
+        <button class="cta-button secondary" id="cookie-customize-btn" type="button"><span>Customize</span></button>
+        <button class="cta-button secondary" id="cookie-reject" type="button"><span>Reject All</span></button>
+        <button class="cta-button" id="cookie-accept" type="button"><span>Accept All</span></button>
+      </div>
+    </div>
+    <div class="cookie-customize" id="cookie-customize-panel" hidden>
+      <div class="cookie-toggle-row">
+        <div class="cookie-toggle-copy">
+          <strong>Functional</strong>
+          <span>Cal.com booking calendar</span>
+        </div>
+        <label class="cookie-toggle-switch">
+          <input type="checkbox" id="toggle-functional">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-toggle-row">
+        <div class="cookie-toggle-copy">
+          <strong>Analytics</strong>
+          <span>Google Analytics, to understand site usage</span>
+        </div>
+        <label class="cookie-toggle-switch">
+          <input type="checkbox" id="toggle-analytics">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-customize-actions">
+        <button class="cta-button" id="cookie-save-preferences" type="button"><span>Save preferences</span></button>
+      </div>
     </div>
   </div>
 </div>
-<script>
-  (function () {
-    var KEY = 'tc-cookie-consent';
-    var banner = document.getElementById('cookie-banner');
-    if (!banner) return;
-    if (!localStorage.getItem(KEY)) banner.classList.add('visible');
-    function setConsent(value) {
-      localStorage.setItem(KEY, value);
-      banner.classList.remove('visible');
-    }
-    document.getElementById('cookie-accept').addEventListener('click', function () { setConsent('accepted'); });
-    document.getElementById('cookie-reject').addEventListener('click', function () { setConsent('rejected'); });
-  })();
-</script>
+<script src="assets/js/consent.js"></script>
 
 <header class="site-header">
   <div class="header-pill">
@@ -688,8 +667,7 @@
         <a href="index.html#about">About us</a>
         <a href="index.html#how-it-works">How it works</a>
         <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="https://cdn.prod.website-files.com/62fe59fa4af2991c1d18512c/63177f09064a37c241caabb8_roometric%20AGBs.pdf" target="_blank" rel="noopener">Data Protection</a>
-        <a href="#">Terms &amp; Conditions</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
         <a href="impressum.html">Imprint</a>
       </nav>
     </div>
