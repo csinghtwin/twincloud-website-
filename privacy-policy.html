@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datenschutzerklärung — TwinCloud</title>
+<meta name="description" content="Datenschutzerklärung der TwinCloud GmbH.">
+<link rel="stylesheet" href="assets/css/cookie-banner.css">
+<style>
+  /* Self-hosted fonts (not Google's CDN) — avoids sending visitor IPs to Google */
+  @font-face {
+    font-family: "Plus Jakarta Sans";
+    font-style: normal;
+    font-weight: 500 800;
+    font-display: swap;
+    src: url("assets/fonts/plus-jakarta-sans-variable.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url("assets/fonts/manrope-variable.woff2") format("woff2");
+  }
+  :root {
+    --primary: #172947;
+    --secondary: #2B85D6;
+    --accent: #1CCF87;
+    --ink: #1F2A33;
+    --mid: #5C6B75;
+    --border: #DDE3E6;
+    --ground: #F7FBFA;
+    --white: #FFFFFF;
+    --blue-300: #54688F;
+    --blue-50: #E6E8EE;
+
+    --font-display: "Plus Jakarta Sans", sans-serif;
+    --font-body: "Manrope", sans-serif;
+
+    --container-max: 1152px;
+    --section-pad-x: 64px;
+    --section-pad-y: 96px;
+  }
+  @media (max-width: 1024px) { :root { --section-pad-x: 40px; } }
+  @media (max-width: 767px) { :root { --section-pad-x: 24px; --section-pad-y: 64px; } }
+  @media (max-width: 480px) { :root { --section-pad-x: 20px; } }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--ground);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: var(--secondary); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  h1, h2, p { margin: 0; }
+  :focus-visible { outline: 2px solid var(--secondary); outline-offset: 2px; }
+
+  /* ==== CTA button — copied verbatim from index.html ==== */
+  .cta-button {
+    position: relative; display: inline-flex; align-items: center; justify-content: center;
+    height: 44px; padding: 0 24px; border: none; border-radius: 20px;
+    background: var(--ink); color: var(--white);
+    font-family: var(--font-body); font-weight: 700; font-size: 16px; line-height: 1.5;
+    overflow: hidden; isolation: isolate; transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .cta-button::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(23, 41, 71, 0), var(--primary));
+    transform: translateX(-100%); transition: transform 0.35s ease; z-index: -1;
+  }
+  .cta-button:hover::before, .cta-button:focus-visible::before { transform: translateX(0); }
+  .cta-button:hover { box-shadow: 0 6px 16px rgba(23, 41, 71, 0.25); }
+  .cta-button:active { transform: scale(0.96); box-shadow: 0 2px 8px rgba(23, 41, 71, 0.2); }
+  .cta-button span { position: relative; }
+  .cta-button:hover, .cta-button:focus-visible { text-decoration: none; }
+
+  /* ==== Site header — copied verbatim from index.html ==== */
+  .site-header { position: fixed; top: 16px; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; padding: 0 54px; }
+  .header-pill {
+    display: flex; align-items: center; justify-content: center; gap: 24px;
+    width: 100%; max-width: var(--container-max); padding: 10px 12px;
+    border-radius: 40px; border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.84); backdrop-filter: blur(12px);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  .header-pill.is-scrolled { box-shadow: 0 8px 24px rgba(23, 41, 71, 0.12); background: rgba(255, 255, 255, 0.96); }
+  .header-brand { display: flex; align-items: center; gap: 3.6px; flex: 1; }
+  .logo-lockup { height: 40px; width: auto; flex-shrink: 0; }
+  .header-brand .logo-lockup { height: 38px; padding: 0 4px; }
+  .header-cta { flex-shrink: 0; }
+  @media (max-width: 767px) {
+    .site-header { top: 0; padding: 0; }
+    .header-pill {
+      max-width: 100%;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+      backdrop-filter: none;
+      padding: 14px 20px;
+    }
+    .header-brand .logo-lockup { height: 27px; }
+  }
+
+  /* ==== Shared section rhythm — copied verbatim from index.html ==== */
+  main { flex: 1 0 auto; padding-top: 106px; }
+  .section { padding: 0 var(--section-pad-x) var(--section-pad-y); display: flex; flex-direction: column; align-items: center; }
+  .eyebrow { font-family: var(--font-display); font-weight: 500; font-size: 20px; line-height: 30px; color: var(--blue-300); text-align: center; }
+  .page-title {
+    font-family: var(--font-display); font-weight: 800; font-size: 45px; line-height: 1.15;
+    color: var(--ink); text-align: center; margin: 6px 0 8px;
+  }
+  @media (max-width: 767px) { .page-title { font-size: 34px; } }
+  .updated-note { text-align: center; color: var(--mid); font-size: 0.9rem; margin: 0 0 40px; }
+
+  /* ---- Policy content ---- */
+  .policy-content {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  @media (max-width: 620px) { .policy-content { padding: 28px 20px; } }
+  .policy-section h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+  .policy-section p {
+    color: var(--mid);
+    font-size: 0.96rem;
+    line-height: 1.7;
+    margin: 0 0 10px;
+  }
+  .policy-section p:last-child { margin-bottom: 0; }
+  .policy-section .addr { color: var(--ink); }
+
+  /* ==== Footer — copied verbatim from index.html ==== */
+  .site-footer { background: var(--primary); padding: 56px 80px 24px; display: flex; justify-content: center; }
+  .footer-inner { display: flex; flex-direction: column; gap: 35px; width: 100%; max-width: 1120px; }
+  .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .footer-brand { display: flex; align-items: center; gap: 6px; }
+  .footer-links { display: flex; gap: 36px; flex-wrap: wrap; justify-content: flex-end; }
+  .footer-links a { position: relative; font-family: var(--font-body); font-weight: 700; font-size: 16px; color: var(--blue-50); white-space: nowrap; transition: color 0.2s ease; }
+  .footer-links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -4px; height: 1px; background: var(--accent); transition: right 0.25s ease; }
+  .footer-links a:hover, .footer-links a:focus-visible { color: var(--accent); text-decoration: none; }
+  .footer-links a:hover::after, .footer-links a:focus-visible::after { right: 0; }
+  .footer-links a.current { color: var(--accent); }
+  .footer-divider { height: 1px; width: 100%; background: rgba(247, 251, 250, 0.15); border: none; }
+  .footer-utility { display: flex; justify-content: flex-end; }
+  .footer-utility p { font-family: var(--font-body); font-weight: 400; font-size: 13px; line-height: 1.5; color: var(--ground); opacity: 0.8; text-align: right; }
+  @media (max-width: 767px) {
+    .site-footer { padding: 40px 24px 20px; }
+    .footer-main { flex-direction: column; align-items: center; text-align: center; }
+    .footer-links { justify-content: center; gap: 20px 28px; }
+    .footer-utility { justify-content: center; }
+    .footer-utility p { text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .cta-button::before, .footer-links a::after, .logo-lockup { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cookie-banner" id="cookie-banner">
+  <div class="cookie-banner-inner">
+    <div class="cookie-banner-main">
+      <p class="cookie-banner-text">We use optional cookies for our booking calendar and analytics. Read our <a href="privacy-policy.html">privacy policy</a> or <a href="#" id="cookie-customize-btn">manage cookies</a>.</p>
+      <div class="cookie-banner-actions">
+        <button class="cta-button secondary" id="cookie-reject" type="button"><span>Reject All</span></button>
+        <button class="cta-button" id="cookie-accept" type="button"><span>Accept All</span></button>
+      </div>
+    </div>
+    <div class="cookie-customize" id="cookie-customize-panel" hidden>
+      <div class="cookie-toggle-row">
+        <div class="cookie-toggle-copy">
+          <strong>Functional</strong>
+          <span>Cal.com booking calendar</span>
+        </div>
+        <label class="cookie-toggle-switch">
+          <input type="checkbox" id="toggle-functional">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-toggle-row">
+        <div class="cookie-toggle-copy">
+          <strong>Analytics</strong>
+          <span>Google Analytics, to understand site usage</span>
+        </div>
+        <label class="cookie-toggle-switch">
+          <input type="checkbox" id="toggle-analytics">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-customize-actions">
+        <button class="cta-button" id="cookie-save-preferences" type="button"><span>Save preferences</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/consent.js"></script>
+
+<header class="site-header">
+  <div class="header-pill">
+    <a class="header-brand" href="index.html" aria-label="TwinCloud home">
+      <picture>
+        <source media="(max-width: 767px)" srcset="assets/logo/twincloud-logo-mark.svg">
+        <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup.svg" alt="TwinCloud">
+      </picture>
+    </a>
+    <a class="cta-button header-cta" href="index.html#contact"><span>Book a Demo</span></a>
+  </div>
+</header>
+
+<main>
+  <div class="section">
+    <p class="eyebrow">Rechtliches</p>
+    <h1 class="page-title">Datenschutzerklärung</h1>
+    <p class="updated-note">Stand: August 2026</p>
+
+    <div class="policy-content">
+      <div class="policy-section">
+        <h2>1. Allgemeine Informationen</h2>
+        <p>Der Schutz Ihrer personenbezogenen Daten ist uns wichtig. Diese Datenschutzerklärung informiert Sie darüber, welche Daten wir bei Nutzung unserer Website <strong>twincloud.ai</strong> sowie der TwinCloud-Plattform (Web-Dashboard) verarbeiten, zu welchen Zwecken dies geschieht und welche Rechte Ihnen zustehen.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>2. Verantwortlicher</h2>
+        <p class="addr">TwinCloud GmbH<br>vertreten durch den Geschäftsführer Herrn Leonhard Thyssen<br>Baseler Str. 165, 12205 Berlin<br>E-Mail: <a href="mailto:info@twincloud.ai">info@twincloud.ai</a> · Tel.: +49 30 40 36 88 94 0</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>3. Datenschutzbeauftragter</h2>
+        <p>Gemäß § 38 BDSG i. V. m. Art. 37 DSGVO sind wir derzeit nicht zur Benennung eines Datenschutzbeauftragten verpflichtet. Für Fragen zum Datenschutz erreichen Sie uns unter den in Ziffer 2 genannten Kontaktdaten.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>4. Ihre Rechte</h2>
+        <p>Als betroffene Person stehen Ihnen nach der DSGVO folgende Rechte zu:</p>
+        <p><strong>Auskunft</strong> über die von uns verarbeiteten personenbezogenen Daten (Art. 15 DSGVO). <strong>Berichtigung</strong> unrichtiger bzw. Vervollständigung unvollständiger Daten (Art. 16 DSGVO). <strong>Löschung</strong> Ihrer Daten, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen (Art. 17 DSGVO). <strong>Einschränkung der Verarbeitung</strong>, sofern die gesetzlichen Voraussetzungen vorliegen (Art. 18 DSGVO). <strong>Datenübertragbarkeit</strong> in einem strukturierten, gängigen und maschinenlesbaren Format, soweit die Verarbeitung auf einer Einwilligung oder einem Vertrag beruht (Art. 20 DSGVO). <strong>Widerspruch</strong> gegen die Verarbeitung aus Gründen, die sich aus Ihrer besonderen Situation ergeben (Art. 21 DSGVO). <strong>Widerruf</strong> einer erteilten Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO). <strong>Beschwerde</strong> bei einer Datenschutzaufsichtsbehörde (Art. 77 DSGVO) — zuständig ist insbesondere die Berliner Beauftragte für Datenschutz und Informationsfreiheit.</p>
+        <p>Zur Ausübung Ihrer Rechte senden Sie uns eine E-Mail an <a href="mailto:info@twincloud.ai">info@twincloud.ai</a> oder wenden Sie sich schriftlich an die oben genannte Adresse.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>5. Aufruf unserer Website (Server-Logdaten)</h2>
+        <p>Beim Besuch unserer Website erhebt unser Hosting-Dienstleister automatisch technische Zugriffsdaten, die Ihr Browser übermittelt: IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, verwendeter Browser und Betriebssystem sowie die zuvor besuchte Seite (Referrer). Diese Daten werden ausschließlich zur technischen Bereitstellung der Website, zur Gewährleistung der Systemsicherheit sowie zur Fehleranalyse verarbeitet und nicht mit anderen Datenquellen zusammengeführt. Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren und funktionsfähigen Betrieb der Website (Art. 6 Abs. 1 S. 1 lit. f DSGVO).</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>6. Cookies und Einwilligungsverwaltung</h2>
+        <p>Unsere Website verwendet ausschließlich dann Cookies bzw. vergleichbare Speichertechnologien, wenn Sie dem über unseren Cookie-Hinweis zugestimmt haben. Ihre Auswahl speichern wir technisch notwendig in Ihrem Browser (lokaler Speicher), damit wir Sie nicht bei jedem Seitenaufruf erneut fragen müssen. Ohne Ihre Zustimmung werden insbesondere keine Inhalte des Buchungs-Dienstleisters Cal.com (vgl. Ziffer 7) geladen. Rechtsgrundlage für optionale Cookies ist Ihre Einwilligung (Art. 6 Abs. 1 S. 1 lit. a DSGVO), die Sie jederzeit mit Wirkung für die Zukunft widerrufen können.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>7. Terminbuchung über Cal.com</h2>
+        <p>Für die Buchung von Beratungsgesprächen ("Book a Demo") binden wir den Dienst <strong>Cal.com</strong> (Cal.com, Inc.) ein. Dieser wird erst nach Ihrer ausdrücklichen Einwilligung geladen. Bei der Terminbuchung übermitteln Sie Name, E-Mail-Adresse, Zeitzone und ggf. weitere von Ihnen eingegebene Angaben an Cal.com. Cal.com verarbeitet diese Daten als eigenständiger Anbieter u. a. zur Bereitstellung des Buchungskalenders und setzt hierfür technisch notwendige Cookies. Da Cal.com außerhalb der Europäischen Union verarbeiten kann, erfolgt die Übermittlung auf Grundlage geeigneter Garantien nach Art. 46 DSGVO (Standardvertragsklauseln). Weitere Informationen entnehmen Sie der <a href="https://cal.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Cal.com</a>. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 S. 1 lit. a DSGVO) sowie, soweit es zur Terminvereinbarung kommt, die Vertragsanbahnung (Art. 6 Abs. 1 S. 1 lit. b DSGVO).</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>8. Schriftarten (Google Fonts)</h2>
+        <p>Die auf dieser Website verwendeten Schriftarten (Plus Jakarta Sans, Manrope, IBM Plex Mono) werden <strong>lokal von unseren eigenen Servern</strong> ausgeliefert. Es findet keine Verbindung zu Servern von Google statt; es werden keine Daten (z. B. Ihre IP-Adresse) an Google oder einen anderen Schriftarten-Anbieter übertragen.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>9. Die TwinCloud-Plattform</h2>
+        <p>TwinCloud bietet keine im App Store oder Google Play Store herunterladbare App an. Die Erfassung erfolgt mit Standard-Kamerahardware (z. B. einer 360°-Kamera) über die Anwendung des jeweiligen Kamera-Herstellers; die Auswertung und Ansicht der erzeugten digitalen Gebäudezwillinge erfolgt browserbasiert über das TwinCloud-Dashboard.</p>
+        <p>Kunden, die Zugang zum Dashboard erhalten, übermitteln uns dafür erforderliche Kontakt- und Zugangsdaten (z. B. Name, geschäftliche E-Mail-Adresse). Diese Daten verarbeiten wir zur Erfüllung des mit dem Kunden geschlossenen Vertrages (Art. 6 Abs. 1 S. 1 lit. b DSGVO). Eine Profilbildung zu einzelnen Nutzern findet nicht statt.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>10. Datenverarbeitung im Rahmen der 360°-Gebäudeerfassung</h2>
+        <p>Die von unseren Kunden bzw. deren beauftragten Personen erstellten 360°-Videoaufnahmen können technisch bedingt auch Personen zeigen, die sich zum Zeitpunkt der Aufnahme im erfassten Gebäude aufhalten (z. B. Bewohner, Mitarbeiter). Für die Rechtmäßigkeit solcher Aufnahmen – insbesondere die Information betroffener Personen – ist gemäß unseren Allgemeinen Geschäftsbedingungen der jeweilige Kunde verantwortlich, da er die Aufnahme veranlasst und die Örtlichkeit kontrolliert.</p>
+        <p>Wir selbst verarbeiten das Rohmaterial ausschließlich zur automatisierten Erstellung des digitalen Gebäudezwillings für den auftraggebenden Kunden (Art. 6 Abs. 1 S. 1 lit. b DSGVO, ggf. i. V. m. lit. f für berechtigte Interessen des Kunden). Eine gezielte Erkennung, Auswertung oder Profilbildung von Personen findet nicht statt. Rohaufnahmen werden nur so lange gespeichert, wie dies zur Erstellung und Qualitätssicherung des Gebäudezwillings erforderlich ist (vgl. Ziffer 13).</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>11. Empfänger und Auftragsverarbeiter</h2>
+        <p>Wir setzen sorgfältig ausgewählte Dienstleister ein, die uns bei Betrieb und Absicherung unserer Website und Plattform unterstützen, insbesondere Hosting-Dienstleister und den Buchungs-Dienstleister Cal.com (vgl. Ziffer 7). Mit allen Auftragsverarbeitern haben wir, soweit erforderlich, Verträge zur Auftragsverarbeitung nach Art. 28 DSGVO geschlossen. Eine Weitergabe Ihrer Daten an sonstige Dritte erfolgt nur, soweit dies zur Vertragserfüllung notwendig ist, wir gesetzlich dazu verpflichtet sind, oder Sie zuvor eingewilligt haben.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>12. Übermittlung in Drittländer</h2>
+        <p>Grundsätzlich verarbeiten wir Ihre Daten innerhalb der Europäischen Union bzw. des Europäischen Wirtschaftsraums. Soweit einzelne Dienstleister (z. B. Cal.com, vgl. Ziffer 7) Daten außerhalb der EU/des EWR verarbeiten, stellen wir durch geeignete Garantien im Sinne der Art. 44 ff. DSGVO – insbesondere Standardvertragsklauseln der Europäischen Kommission – ein angemessenes Datenschutzniveau sicher.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>13. Speicherdauer</h2>
+        <p>Wir speichern personenbezogene Daten nur so lange, wie dies für die jeweiligen Verarbeitungszwecke erforderlich ist, oder solange gesetzliche Aufbewahrungspflichten (z. B. handels- und steuerrechtliche Vorgaben von bis zu zehn Jahren) bestehen. Zugriffsdaten nach Ziffer 5 werden nach kurzer Zeit automatisiert gelöscht, sofern sie nicht zur Aufklärung eines sicherheitsrelevanten Vorfalls weiter benötigt werden. Rohaufnahmen aus der Gebäudeerfassung (Ziffer 10) werden gelöscht, sobald sie für die Erstellung und Qualitätssicherung des jeweiligen Gebäudezwillings nicht mehr benötigt werden, spätestens jedoch mit Beendigung des Vertragsverhältnisses mit dem betreffenden Kunden.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>14. Datensicherheit</h2>
+        <p>Wir setzen angemessene technische und organisatorische Maßnahmen ein, um Ihre Daten vor unbefugtem Zugriff, Verlust oder Missbrauch zu schützen, u. a. eine verschlüsselte Übertragung (TLS) sowie eine Beschränkung von Zugriffsrechten auf das erforderliche Maß. Eine vollständige Sicherheit der Datenübertragung im Internet können wir gleichwohl nicht garantieren.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>15. Hyperlinks auf andere Websites</h2>
+        <p>Unsere Website kann Links zu externen Websites Dritter enthalten (z. B. Cal.com). Für die dort erfolgende Datenverarbeitung sind wir nicht verantwortlich. Informationen hierzu entnehmen Sie den jeweiligen Datenschutzerklärungen der verlinkten Anbieter.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>16. Änderungen dieser Datenschutzerklärung</h2>
+        <p>Diese Datenschutzerklärung kann jederzeit unter <a href="privacy-policy.html">twincloud.ai/privacy-policy.html</a> abgerufen werden. Gesetzesänderungen oder Anpassungen unserer Website bzw. Plattform können eine Aktualisierung erforderlich machen; wir bitten Sie daher, diese Erklärung von Zeit zu Zeit erneut zu lesen.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup-footer.svg" alt="TwinCloud">
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="privacy-policy.html" class="current">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="impressum.html">Imprint</a>
+      </nav>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-utility">
+      <p>© 2026 TwinCloud. All rights reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var headerPill = document.querySelector('.header-pill');
+  if (headerPill) {
+    window.addEventListener('scroll', function () {
+      headerPill.classList.toggle('is-scrolled', window.scrollY > 8);
+    }, { passive: true });
+  }
+</script>
+</body>
+</html>

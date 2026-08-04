@@ -6,7 +6,7 @@
 ._*
 
 # Custom folder icons
-Icon
+Icon
 
 # Volume root files
 .DocumentRevisions-V100
@@ -30,3 +30,7 @@ Icon
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+### Project
+node_modules/
+.vercel

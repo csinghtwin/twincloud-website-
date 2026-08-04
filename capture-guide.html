@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>360° Capture Guide — TwinCloud</title>
+<meta name="description" content="Field guide for capturing a 360° walkthrough scan with the DJI Osmo 360 — setup, technique, and per-scene recipes.">
+<link rel="stylesheet" href="assets/css/cookie-banner.css">
+<style>
+  /* Self-hosted fonts (not Google's CDN) — avoids sending visitor IPs to Google */
+  @font-face {
+    font-family: "Plus Jakarta Sans";
+    font-style: normal;
+    font-weight: 500 800;
+    font-display: swap;
+    src: url("assets/fonts/plus-jakarta-sans-variable.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url("assets/fonts/manrope-variable.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("assets/fonts/ibm-plex-mono-500.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("assets/fonts/ibm-plex-mono-600.woff2") format("woff2");
+  }
+  /* ==== Design tokens — copied verbatim from index.html (source of truth) ==== */
+  :root {
+    --primary: #172947;
+    --secondary: #2B85D6;
+    --accent: #1CCF87;
+    --ink: #1F2A33;
+    --mid: #5C6B75;
+    --border: #DDE3E6;
+    --border-soft: rgba(178, 173, 177, 0.5);
+    --ground: #F7FBFA;
+    --warning: #D89A32;
+    --error: #D14B44;
+    --white: #FFFFFF;
+
+    --blue-300: #54688F;
+    --blue-50: #E6E8EE;
+    --violet-900: #696669;
+    --navy-950: #001D58;
+    --navy-ink: #000C25;
+
+    --accent-tint: rgba(28, 207, 135, 0.12);
+    --accent-tint-strong: rgba(28, 207, 135, 0.18);
+    --accent-dark: #0D8A58;
+    --warning-tint: rgba(216, 154, 50, 0.12);
+    --warning-dark: #9C6D1F;
+
+    --font-display: "Plus Jakarta Sans", sans-serif;
+    --font-body: "Manrope", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+    --container-max: 1152px;
+    --section-pad-x: 64px;
+    --section-pad-y: 96px;
+  }
+  @media (max-width: 1024px) { :root { --section-pad-x: 40px; } }
+  @media (max-width: 767px) { :root { --section-pad-x: 24px; --section-pad-y: 64px; } }
+  @media (max-width: 480px) { :root { --section-pad-x: 20px; } }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--ground);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+  h1, h2, h3, p, ul { margin: 0; }
+  code {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.82em;
+    background: var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    white-space: nowrap;
+  }
+  :focus-visible { outline: 2px solid var(--secondary); outline-offset: 2px; }
+
+  /* ==== CTA button — copied verbatim from index.html ==== */
+  .cta-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 20px;
+    background: var(--ink);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .cta-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(23, 41, 71, 0), var(--primary));
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    z-index: -1;
+  }
+  .cta-button:hover::before, .cta-button:focus-visible::before { transform: translateX(0); }
+  .cta-button:hover { box-shadow: 0 6px 16px rgba(23, 41, 71, 0.25); }
+  .cta-button:active { transform: scale(0.96); box-shadow: 0 2px 8px rgba(23, 41, 71, 0.2); }
+  .cta-button.secondary { background: var(--white); color: var(--ink); border: 1px solid var(--border); }
+  .cta-button.secondary::before { display: none; }
+  .cta-button.secondary:hover { border-color: var(--accent); box-shadow: none; }
+  .cta-button span { position: relative; }
+
+  /* ==== Site header — copied verbatim from index.html ==== */
+  .site-header {
+    position: fixed;
+    top: 16px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    padding: 0 54px;
+  }
+  .header-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    width: 100%;
+    max-width: var(--container-max);
+    padding: 10px 12px;
+    border-radius: 40px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.84);
+    backdrop-filter: blur(12px);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  .header-pill.is-scrolled { box-shadow: 0 8px 24px rgba(23, 41, 71, 0.12); background: rgba(255, 255, 255, 0.96); }
+  .header-brand { display: flex; align-items: center; gap: 3.6px; flex: 1; }
+  .logo-lockup { height: 40px; width: auto; flex-shrink: 0; }
+  .header-brand .logo-lockup { height: 38px; padding: 0 4px; }
+  .header-cta { flex-shrink: 0; }
+
+  @media (max-width: 767px) {
+    .site-header { top: 0; padding: 0; }
+    .header-pill {
+      max-width: 100%;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+      backdrop-filter: none;
+      padding: 14px 20px;
+    }
+    .header-brand .logo-lockup { height: 27px; }
+  }
+
+  /* ==== Shared section rhythm — copied verbatim from index.html ==== */
+  .section { padding: var(--section-pad-y) var(--section-pad-x); display: flex; flex-direction: column; align-items: center; }
+  .section-header { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; width: 100%; }
+  .eyebrow { font-family: var(--font-display); font-weight: 500; font-size: 20px; line-height: 30px; color: var(--blue-300); }
+  .section-title { font-family: var(--font-display); font-weight: 700; font-size: 34px; line-height: 1.35; color: var(--ink); }
+  @media (max-width: 767px) { .section-title { font-size: 26px; line-height: 1.35; } .eyebrow { font-size: 17px; line-height: 1.4; } }
+
+  /* ==== Page shell ==== */
+  main { padding-top: 106px; }
+  .stage {
+    padding: 0 var(--section-pad-x) var(--section-pad-y);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .guide-content { width: 100%; max-width: var(--container-max); margin: 0 auto; }
+  .view { display: none; }
+  .view.active { display: block; animation: fade-in 0.35s ease; }
+  @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  /* ---- Home ---- */
+  .hero-block { text-align: center; }
+  .hero-block h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.5;
+    margin: 0 0 8px;
+  }
+  .hero-block .sub { font-family: var(--font-display); font-weight: 500; color: var(--mid); font-size: 20px; line-height: 30px; }
+
+  .rules3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 32px 0; }
+  @media (max-width: 620px) { .rules3 { grid-template-columns: 1fr; } }
+  .rules3 div { background: var(--primary); color: var(--white); border-radius: 16px; padding: 16px 18px; font-size: 0.87rem; line-height: 1.4; }
+  .rules3 div b { display: block; color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 0.98rem; margin-bottom: 3px; }
+
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 620px) { .tiles { grid-template-columns: 1fr; } }
+  .tile {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .tile:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(23, 41, 71, 0.08); border-color: var(--accent); }
+  .tile .icon-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--border);
+    font-size: 1.3rem;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+  }
+  .tile:hover .icon-chip { background: var(--accent-tint); transform: scale(1.06); }
+  .tile h2 { font-family: var(--font-body); font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+  .tile p { color: var(--mid); font-size: 0.88rem; }
+  .tile .items { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+  .tile .items span {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 500;
+    color: var(--primary);
+    background: var(--ground);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px 8px;
+  }
+  .tile .go { margin-top: auto; color: var(--accent-dark); font-weight: 700; font-size: 0.86rem; }
+  .tile.tinted { background: var(--ground); }
+
+  /* ---- Section views ---- */
+  .backlink { display: inline-flex; align-items: center; gap: 6px; color: var(--mid); font-weight: 700; font-size: 0.85rem; margin-bottom: 16px; transition: color 0.2s ease; }
+  .backlink:hover { color: var(--primary); }
+  .sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .sec-head .em { font-size: 1.6rem; }
+  .sec-sub { color: var(--mid); font-size: 0.93rem; margin: 0 0 20px; }
+
+  .nextsec { display: flex; justify-content: space-between; gap: 10px; margin-top: 24px; }
+  .nextsec .cta-button { padding: 0 22px; }
+  .nextsec .fwd { margin-left: auto; }
+
+  /* ---- Step cards — same recipe as .feature-card in index.html ---- */
+  .step { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px; margin: 14px 0; }
+  .step-head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .step-head .n { font-family: var(--font-mono); font-weight: 600; font-size: 0.78rem; color: var(--primary); background: var(--border); border-radius: 8px; padding: 4px 9px; flex: 0 0 auto; }
+  .step-head h3 { font-family: var(--font-body); font-weight: 700; font-size: 18px; letter-spacing: -0.01em; flex: 1; }
+  .freq { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; color: var(--mid); border: 1px solid var(--border); border-radius: 5px; padding: 3px 7px; background: var(--ground); white-space: nowrap; flex: 0 0 auto; }
+  .freq.hot { border-color: #B7EBD3; background: var(--accent-tint); color: var(--accent-dark); }
+
+  .row { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .row:last-of-type { border-bottom: none; }
+  .row .ic { flex: 0 0 32px; height: 32px; border-radius: 10px; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.95rem; }
+  .row.default .ic { background: var(--accent-tint); }
+  .row .tx { flex: 1; font-size: 0.93rem; padding-top: 2px; }
+  .row .tx b { font-weight: 700; }
+  .row .tx span { color: var(--mid); font-size: 0.85rem; display: block; margin-top: 2px; }
+  .tag-default { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; background: var(--accent); color: var(--primary); border-radius: 4px; padding: 2px 6px; vertical-align: 2px; margin-left: 6px; }
+
+  .media { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin: 16px 0 4px; }
+  .media figure { margin: 0; flex: 1 1 150px; max-width: 190px; }
+  .media figure.big { flex: 1 1 220px; max-width: 300px; }
+  .media img { width: 100%; display: block; border: 1px solid var(--border); border-radius: 12px; }
+  figcaption { font-size: 0.72rem; color: var(--mid); text-align: center; margin-top: 6px; font-family: var(--font-mono); }
+  figure.video { position: relative; }
+  figure.video .play {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(31, 42, 51, 0.82);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s ease;
+  }
+  figure.video:hover .play { transform: translate(-50%, -50%) scale(1.08); }
+  figure.video .play::after { content: ""; border-style: solid; border-width: 9px 0 9px 15px; border-color: transparent transparent transparent var(--white); margin-left: 4px; }
+  .ph-img {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    background: repeating-linear-gradient(45deg, var(--ground), var(--ground) 12px, #EEF4F2 12px, #EEF4F2 24px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--mid); text-align: center; padding: 16px 10px; font-size: 0.78rem; gap: 5px;
+    aspect-ratio: 9 / 16;
+  }
+  .ph-img .big { font-size: 1.4rem; }
+
+  .why, .note { border-radius: 12px; padding: 12px 16px; margin: 12px 0 0; font-size: 0.88rem; }
+  .why { background: var(--accent-tint); border: 1px solid #B7EBD3; }
+  .why b { color: var(--accent-dark); }
+  .note { background: var(--warning-tint); border: 1px solid #EED6AC; }
+  .note b { color: var(--warning-dark); }
+  .fine { color: var(--mid); font-size: 0.85rem; margin: 10px 0 0; }
+
+  /* ---- Checklist ---- */
+  .checklist { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 6px 20px; margin: 0 0 18px; }
+  .chk { display: flex; gap: 12px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; }
+  .chk:last-child { border-bottom: none; }
+  .chk .box { flex: 0 0 26px; height: 26px; border-radius: 8px; border: 2px solid var(--border); background: var(--ground); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: var(--white); transition: background-color 0.15s ease, border-color 0.15s ease; }
+  .chk.done .box { background: var(--accent); border-color: var(--accent); }
+  .chk.done .box::after { content: "✓"; color: var(--primary); font-weight: 800; }
+  .chk .tx { flex: 1; font-size: 0.94rem; font-weight: 700; }
+  .chk.done .tx { color: var(--mid); text-decoration: line-through; }
+  .chk .tx span { display: block; font-weight: 400; font-size: 0.81rem; color: var(--mid); text-decoration: none; margin-top: 1px; }
+  .chk a { color: var(--accent-dark); font-size: 0.79rem; font-weight: 700; white-space: nowrap; flex: 0 0 auto; padding: 4px 2px; transition: opacity 0.15s ease; }
+  .chk a:hover { opacity: 0.7; text-decoration: underline; }
+  .chk-reset { color: var(--mid); font-size: 0.82rem; font-weight: 600; padding: 8px 0; display: block; margin: 4px 0 16px; transition: color 0.2s ease; }
+  .chk-reset:hover { color: var(--primary); }
+
+  .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 6px; }
+  @media (max-width: 600px) { .dodont { grid-template-columns: 1fr; } }
+  .do, .dont { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 16px 18px; font-size: 0.87rem; }
+  .do { border-top: 3px solid var(--accent); }
+  .dont { border-top: 3px solid var(--error); }
+  .do h3 { color: var(--accent-dark); margin: 0 0 10px; font-family: var(--font-display); font-size: 0.95rem; }
+  .dont h3 { color: var(--error); margin: 0 0 10px; font-family: var(--font-display); font-size: 0.95rem; }
+  .do ul, .dont ul { padding-left: 1.2em; margin: 0; }
+  .do li, .dont li { margin: 0.35em 0; }
+
+  /* ==== Footer — copied verbatim from index.html ==== */
+  .site-footer { background: var(--primary); padding: 56px 80px 24px; display: flex; justify-content: center; margin-top: 96px; }
+  .footer-inner { display: flex; flex-direction: column; gap: 35px; width: 100%; max-width: 1120px; }
+  .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .footer-brand { display: flex; align-items: center; gap: 6px; }
+  .footer-links { display: flex; gap: 36px; flex-wrap: wrap; justify-content: flex-end; }
+  .footer-links a { position: relative; font-family: var(--font-body); font-weight: 700; font-size: 16px; color: var(--blue-50); white-space: nowrap; transition: color 0.2s ease; }
+  .footer-links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -4px; height: 1px; background: var(--accent); transition: right 0.25s ease; }
+  .footer-links a:hover, .footer-links a:focus-visible { color: var(--accent); }
+  .footer-links a:hover::after, .footer-links a:focus-visible::after { right: 0; }
+  .footer-divider { height: 1px; width: 100%; background: rgba(247, 251, 250, 0.15); border: none; }
+  .footer-utility { display: flex; justify-content: flex-end; }
+  .footer-utility p { font-family: var(--font-body); font-weight: 400; font-size: 13px; line-height: 1.5; color: var(--ground); opacity: 0.8; text-align: right; }
+
+  @media (max-width: 767px) {
+    .site-footer { padding: 40px 24px 20px; }
+    .footer-main { flex-direction: column; align-items: flex-start; }
+    .footer-links { justify-content: flex-start; gap: 20px 28px; }
+    .footer-utility { justify-content: flex-start; }
+    .footer-utility p { text-align: left; }
+  }
+
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .view.active { animation: none; }
+    .cta-button::before { transition: none; }
+    .footer-links a::after { transition: none; }
+    .tile, .tile .icon-chip, .backlink, .cta-button, figure.video .play, .chk .box, .chk a, .chk-reset, .logo-lockup {
+      transition: none !important;
+    }
+  }
+
+  @media print {
+    .site-header, .site-footer, .nextsec, .backlink { display: none; }
+    main { padding-top: 0; }
+    body { background: var(--white); }
+    .view { display: block !important; }
+    .step { break-inside: avoid; }
+    .tiles { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cookie-banner" id="cookie-banner">
+  <div class="cookie-banner-inner">
+    <div class="cookie-banner-main">
+      <p class="cookie-banner-text">We use optional cookies for our booking calendar and analytics. Read our <a href="privacy-policy.html">privacy policy</a> or <a href="#" id="cookie-customize-btn">manage cookies</a>.</p>
+      <div class="cookie-banner-actions">
+        <button class="cta-button secondary" id="cookie-reject" type="button"><span>Reject All</span></button>
+        <button class="cta-button" id="cookie-accept" type="button"><span>Accept All</span></button>
+      </div>
+    </div>
+    <div class="cookie-customize" id="cookie-customize-panel" hidden>
+      <div class="cookie-toggle-row">
+        <div class="cookie-toggle-copy">
+          <strong>Functional</strong>
+          <span>Cal.com booking calendar</span>
+        </div>
+        <label class="cookie-toggle-switch">
+          <input type="checkbox" id="toggle-functional">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-toggle-row">
+        <div class="cookie-toggle-copy">
+          <strong>Analytics</strong>
+          <span>Google Analytics, to understand site usage</span>
+        </div>
+        <label class="cookie-toggle-switch">
+          <input type="checkbox" id="toggle-analytics">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-customize-actions">
+        <button class="cta-button" id="cookie-save-preferences" type="button"><span>Save preferences</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/consent.js"></script>
+
+<header class="site-header">
+  <div class="header-pill">
+    <a class="header-brand" href="index.html" aria-label="TwinCloud home">
+      <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup.svg" alt="TwinCloud">
+    </a>
+    <a class="cta-button header-cta" href="index.html#contact"><span>Need help? Book a call</span></a>
+  </div>
+</header>
+
+<main>
+<div class="stage">
+<div class="guide-content">
+
+<!-- ================= HOME ================= -->
+<div class="view active" id="v-home">
+  <div class="hero-block">
+    <h1>360° Capture Guide</h1>
+    <p class="sub">DJI Osmo 360 · If you can film, you can capture. Pick a topic:</p>
+  </div>
+
+  <div class="rules3">
+    <div><b>One closed loop</b>End where you started.</div>
+    <div><b>One steady pace</b>Slow indoors, normal outdoors.</div>
+    <div><b>One fixed position</b>Camera fixed to your body. Free hand still.</div>
+  </div>
+
+  <div class="tiles">
+    <button class="tile" onclick="show('setup')">
+      <span class="icon-chip">🔌</span>
+      <h2>Setup</h2>
+      <p>Get camera and app ready.</p>
+      <span class="items"><span>1 Register</span><span>2 Settings</span></span>
+      <span class="go">Open →</span>
+    </button>
+    <button class="tile" onclick="show('technique')">
+      <span class="icon-chip">🎥</span>
+      <h2>Technique</h2>
+      <p>Zollstock, holding, heights, walking speed.</p>
+      <span class="items"><span>3 Zollstock</span><span>4 Hold it</span><span>5 Heights</span><span>6 Speed</span></span>
+      <span class="go">Open →</span>
+    </button>
+    <button class="tile" onclick="show('scenes')">
+      <span class="icon-chip">🏢</span>
+      <h2>Scenes</h2>
+      <p>Recipes per situation — rooms, facades, stairs.</p>
+      <span class="items"><span>7 Indoor</span><span>8 Outdoor</span><span>9 Staircases</span></span>
+      <span class="go">Open →</span>
+    </button>
+    <button class="tile tinted" onclick="show('cheatsheet')">
+      <span class="icon-chip">⚡</span>
+      <h2>Cheat sheet</h2>
+      <p>Everything on one screen. Screenshot it.</p>
+      <span class="items"><span>Do</span><span>Don't</span></span>
+      <span class="go">Open →</span>
+    </button>
+  </div>
+</div>
+
+<!-- ================= SETUP ================= -->
+<div class="view" id="v-setup">
+  <button class="backlink" onclick="show('home')">← All topics</button>
+  <div class="sec-head"><span class="em">🔌</span><h1 class="section-title">Setup</h1></div>
+  <p class="sec-sub">Two things before the first scan of the day.</p>
+
+  <div class="step" id="s1">
+    <div class="step-head"><span class="n">1</span><h3>Register camera &amp; app</h3><span class="freq">once</span></div>
+    <div class="row"><div class="ic">🔓</div><div class="tx"><b>Unlock the phone</b><span>Code: <code>1234</code></span></div></div>
+    <div class="row"><div class="ic">✉️</div><div class="tx"><b>Log in to DJI Mimo with the TwinCloud address</b><span>Never a private account. No account yet? Tap <b>Register</b>.</span></div></div>
+    <div class="row"><div class="ic">📶</div><div class="tx"><b>Connect the camera</b><span>Camera on, Bluetooth + Wi-Fi on, follow the prompts.</span></div></div>
+    <div class="row"><div class="ic">🔑</div><div class="tx"><b>Activate</b><span>Tick both checkboxes → <b>Activate</b>. Accept firmware update if asked.</span></div></div>
+    <div class="media">
+      <figure><img src="assets/capture-guide/mimo-login.jpeg" alt="DJI Mimo login screen"><figcaption>log in — or Register</figcaption></figure>
+      <figure><img src="assets/capture-guide/mimo-activate.jpeg" alt="Activate Osmo 360 screen"><figcaption>tick both → Activate</figcaption></figure>
+    </div>
+    <p class="fine">Registration links the camera to the TwinCloud DJI account (warranty + firmware). Already done? It never repeats.</p>
+  </div>
+
+  <div class="step" id="s2">
+    <div class="step-head"><span class="n">2</span><h3>Connect &amp; check settings</h3><span class="freq">daily</span></div>
+    <div class="row"><div class="ic">📶</div><div class="tx"><b>Camera on → open DJI Mimo → connect</b><span>Bluetooth + Wi-Fi on.</span></div></div>
+    <div class="row"><div class="ic">1</div><div class="tx"><b>Mode → <code>VIDEO</code></b></div></div>
+    <div class="row"><div class="ic">2</div><div class="tx"><b>Pro → <code>ON</code></b></div></div>
+    <div class="row"><div class="ic">3</div><div class="tx"><b><code>8K</code> / <code>30 fps</code></b></div></div>
+    <div class="row"><div class="ic">4</div><div class="tx"><b>Exposure → <code>AUTO</code></b><span>Not M.</span></div></div>
+    <div class="media">
+      <figure class="big"><img src="assets/capture-guide/settings-overview.jpeg" alt="The four settings, numbered in the app"><figcaption>the 4 settings, numbered</figcaption></figure>
+      <figure><img src="assets/capture-guide/settings-pro.jpeg" alt="Pro toggle on"><figcaption>2 — Pro on</figcaption></figure>
+      <figure><img src="assets/capture-guide/settings-other.jpeg" alt="Further video settings"><figcaption>rest stays as shown</figcaption></figure>
+      <figure><img src="assets/capture-guide/settings-8k30.jpeg" alt="8K and 30 selected"><figcaption>3 — 8K / 30</figcaption></figure>
+      <figure><img src="assets/capture-guide/settings-auto.jpeg" alt="AUTO exposure selected"><figcaption>4 — AUTO</figcaption></figure>
+      <figure><div class="ph-img"><span class="big">📷</span><b>Placeholder</b><span>annotated 360° preview</span></div><figcaption>screenshot pending</figcaption></figure>
+    </div>
+    <div class="why"><b>Preview looks weird?</b> Normal. The 360° preview warps everything and your body sits strangely in the frame — <b>it doesn't matter</b>. The camera sees everything anyway.</div>
+    <div class="why"><b>Good news:</b> the camera remembers all settings — the daily check takes seconds.</div>
+  </div>
+
+  <div class="nextsec"><button class="cta-button secondary up" onclick="show('home')"><span>← All topics</span></button><button class="cta-button fwd" onclick="show('technique')"><span>Next: Technique →</span></button></div>
+</div>
+
+<!-- ================= TECHNIQUE ================= -->
+<div class="view" id="v-technique">
+  <button class="backlink" onclick="show('home')">← All topics</button>
+  <div class="sec-head"><span class="em">🎥</span><h1 class="section-title">Technique</h1></div>
+  <p class="sec-sub">The habits that make every scan work — starting with the Zollstock.</p>
+
+  <div class="step" id="s3">
+    <div class="step-head"><span class="n">3</span><h3>Place the Zollstock</h3><span class="freq hot">every scan</span></div>
+    <div class="row"><div class="ic">📏</div><div class="tx"><b>Fully unfolded, straight, flat on the floor</b><span>Any direction — orientation doesn't matter.</span></div></div>
+    <div class="row"><div class="ic">🚫</div><div class="tx"><b>Open floor</b><span>Not under furniture, not against a wall.</span></div></div>
+    <div class="row"><div class="ic">👀</div><div class="tx"><b>Walk past it</b><span>Must appear clearly in the video.</span></div></div>
+    <div class="media">
+      <figure class="big"><img src="assets/capture-guide/zollstock.jpeg" alt="Zollstock fully unfolded, flat on the floor"></figure>
+    </div>
+    <div class="why"><b>Why?</b> The ruler is the scale reference — the model can't be measured without it. Only its length matters, which is why orientation is irrelevant.</div>
+  </div>
+
+  <div class="step" id="s4">
+    <div class="step-head"><span class="n">4</span><h3>Hold the camera</h3></div>
+    <div class="row"><div class="ic">🔧</div><div class="tx"><b>Adjust the stick first</b><span>Camera just above your head, stick resting against your belly.</span></div></div>
+    <div class="row"><div class="ic">🔘</div><div class="tx"><b>Power button faces you</b><span>Camera stays fixed to your body — whole recording.</span></div></div>
+    <div class="row"><div class="ic">📐</div><div class="tx"><b>Camera upright, lens level</b></div></div>
+    <div class="row"><div class="ic">✋</div><div class="tx"><b>Free hand: frozen</b></div></div>
+    <div class="media">
+      <figure class="video"><img src="assets/capture-guide/hold-camera-thumb.jpeg" alt="Video: adjusting the selfie stick"><span class="play"></span><figcaption>🎬 video — link to be added</figcaption></figure>
+      <figure class="big"><img src="assets/capture-guide/hold-camera-posture.jpeg" alt="Target posture"><figcaption>target posture</figcaption></figure>
+    </div>
+    <div class="why"><b>Why so strict?</b> You're in every frame. Stay fixed → software removes you cleanly. Move → data lost.</div>
+    <div class="why"><b>Relax:</b> wobbling while pressing start/stop is fine — those frames are cut anyway.</div>
+  </div>
+
+  <div class="step" id="s5">
+    <div class="step-head"><span class="n">5</span><h3>Heights</h3></div>
+    <div class="row default"><div class="ic">🙂</div><div class="tx"><b>Head height <span class="tag-default">default</span></b><span>Start here — facades, windows, most scans.</span></div></div>
+    <div class="row"><div class="ic">👖</div><div class="tx"><b>Waist</b><span>Only: second pass indoors · staircases.</span></div></div>
+    <div class="row"><div class="ic">⬆️</div><div class="tx"><b>Above head</b><span>Only: ceiling pipes &amp; ducts. Hold directly over you.</span></div></div>
+    <div class="row"><div class="ic">⬇️</div><div class="tx"><b>Floor, camera flipped</b><span>Only: ground pipes, rarely. Fully upside down, button toward you, near your feet.</span></div></div>
+    <div class="why"><b>Rule:</b> changing height? <b>Stop. Start a new video.</b> Never mix heights in one file.</div>
+  </div>
+
+  <div class="step" id="s6">
+    <div class="step-head"><span class="n">6</span><h3>Walking speed</h3></div>
+    <div class="row"><div class="ic">🐢</div><div class="tx"><b>Indoor: half your normal pace</b></div></div>
+    <div class="row"><div class="ic">🚶</div><div class="tx"><b>Outdoor: normal pace</b></div></div>
+    <div class="row"><div class="ic">📈</div><div class="tx"><b>Constant — never stop-and-go</b><span>Frames are extracted at fixed intervals; a constant pace gives evenly spaced camera positions.</span></div></div>
+  </div>
+
+  <div class="nextsec"><button class="cta-button secondary up" onclick="show('home')"><span>← All topics</span></button><button class="cta-button fwd" onclick="show('scenes')"><span>Next: Scenes →</span></button></div>
+</div>
+
+<!-- ================= SCENES ================= -->
+<div class="view" id="v-scenes">
+  <button class="backlink" onclick="show('home')">← All topics</button>
+  <div class="sec-head"><span class="em">🏢</span><h1 class="section-title">Scenes</h1></div>
+  <p class="sec-sub">The recipe for each situation. Setup and Technique (Zollstock!) always apply.</p>
+
+  <div class="step" id="s7">
+    <div class="step-head"><span class="n">7</span><h3>Indoor / heating room</h3></div>
+    <div class="row"><div class="ic">📏</div><div class="tx"><b>Zollstock down</b> <span>Technique, step 3</span></div></div>
+    <div class="row"><div class="ic">👀</div><div class="tx"><b>Look around first</b><span>Pumps, labels, pipes, connections.</span></div></div>
+    <div class="row"><div class="ic">🔁</div><div class="tx"><b>One lap per height, <code>0.5–1 m</code> from walls</b><span>2–3 videos: head/ceiling + waist. Floor only if needed.</span></div></div>
+    <div class="row"><div class="ic">🐢</div><div class="tx"><b>Slow &amp; smooth</b><span>No sudden spins — stop, turn, continue.</span></div></div>
+    <div class="row"><div class="ic">🔄</div><div class="tx"><b>Close the loop</b><span>Max <code>6–7 min</code> total per room.</span></div></div>
+    <div class="note"><b>Special cases:</b> Dead end → walk the same path back in reverse. Large room → one extra lap at <code>2–4 m</code> or through the middle (one height). Object hidden behind pipes → stretch your arm in — the only allowed exception to the fixed-position rule.</div>
+  </div>
+
+  <div class="step" id="s8">
+    <div class="step-head"><span class="n">8</span><h3>Outdoor / facades</h3></div>
+    <div class="row"><div class="ic">📏</div><div class="tx"><b>Zollstock down, visible in scan</b></div></div>
+    <div class="row"><div class="ic">🙂</div><div class="tx"><b>One height</b><span>High for facades · waist for ground detail.</span></div></div>
+    <div class="row"><div class="ic">↔️</div><div class="tx"><b>Stay <code>5–10 m</code> away</b><span>Never closer than 3–5 m. Never along the wall.</span></div></div>
+    <div class="row"><div class="ic">🔄</div><div class="tx"><b>Full loop around the building</b><span>Never a single straight line.</span></div></div>
+    <div class="row"><div class="ic">📐</div><div class="tx"><b>Corners &amp; entrances from several directions</b><span>Never skip recesses, balconies, overhangs.</span></div></div>
+    <div class="note"><b>Lighting:</b> prefer even light — avoid harsh shadows and mixed sun/shade if you can pick the time.</div>
+  </div>
+
+  <div class="step" id="s9">
+    <div class="step-head"><span class="n">9</span><h3>Staircases</h3><span class="freq">experimental</span></div>
+    <div class="row"><div class="ic">👖</div><div class="tx"><b>Waist height</b><span>One height is enough.</span></div></div>
+    <div class="row"><div class="ic">🎯</div><div class="tx"><b>Center path</b><span>Middle of the stairs — not handrail, not wall.</span></div></div>
+    <div class="row"><div class="ic">↕️</div><div class="tx"><b>Two runs: up + down</b><span>Each run = its own video. Your body blocks the view behind you — two directions see everything.</span></div></div>
+    <div class="row"><div class="ic">🚶</div><div class="tx"><b>Indoor speed, slightly faster OK</b><span>Not much detail on stairs.</span></div></div>
+    <div class="note"><b>Experimental:</b> if results come back blurry, slow down to normal indoor speed.</div>
+  </div>
+
+  <div class="nextsec"><button class="cta-button secondary up" onclick="show('home')"><span>← All topics</span></button><button class="cta-button fwd" onclick="show('cheatsheet')"><span>Next: Cheat sheet →</span></button></div>
+</div>
+
+<!-- ================= CHEAT SHEET ================= -->
+<div class="view" id="v-cheatsheet">
+  <button class="backlink" onclick="show('home')">← All topics</button>
+  <div class="sec-head"><span class="em">⚡</span><h1 class="section-title">Cheat sheet</h1></div>
+  <p class="sec-sub">Every capture, same routine. Tap to check off — links jump to the details.</p>
+
+  <div class="checklist" id="routine">
+    <div class="chk" onclick="tick(this)"><span class="box"></span><span class="tx">Check camera settings<span><code>VIDEO</code> · Pro · <code>8K/30</code> · <code>AUTO</code></span></span><a href="#s2" onclick="event.stopPropagation()">→ 2 Settings</a></div>
+    <div class="chk" onclick="tick(this)"><span class="box"></span><span class="tx">Put out the Zollstock<span>Unfolded, flat, on open floor</span></span><a href="#s3" onclick="event.stopPropagation()">→ 3 Zollstock</a></div>
+    <div class="chk" onclick="tick(this)"><span class="box"></span><span class="tx">Check the scene<span>Indoor, outdoor or staircase — pick the recipe</span></span><a href="#scenes" onclick="event.stopPropagation()">→ Scenes</a></div>
+    <div class="chk" onclick="tick(this)"><span class="box"></span><span class="tx">Set camera height<span>Default: just above your head · stick against belly</span></span><a href="#s5" onclick="event.stopPropagation()">→ 5 Heights</a></div>
+    <div class="chk" onclick="tick(this)"><span class="box"></span><span class="tx">Start capturing<span>Steady pace · free hand still · close the loop</span></span><a href="#s6" onclick="event.stopPropagation()">→ 6 Speed</a></div>
+  </div>
+  <button class="chk-reset" onclick="resetChecks()">↺ Reset checklist</button>
+
+  <div class="dodont">
+    <div class="do">
+      <h3>✅ Do</h3>
+      <ul>
+        <li>Daily check: <code>VIDEO</code> · Pro · <code>8K/30</code> · <code>AUTO</code></li>
+        <li>Zollstock before every scan</li>
+        <li>Camera fixed, button toward you, just above your head</li>
+        <li>Free hand still</li>
+        <li>Constant pace</li>
+        <li>One height per video</li>
+        <li>Close every loop</li>
+        <li>Corners from several directions</li>
+        <li><code>5–10 m</code> from facades</li>
+        <li>≤ <code>6–7 min</code> per scene</li>
+      </ul>
+    </div>
+    <div class="dont">
+      <h3>❌ Don't</h3>
+      <ul>
+        <li>Mix heights in one video</li>
+        <li>Move your free hand</li>
+        <li>Whip around corners</li>
+        <li>Hug the facade</li>
+        <li>Scan a facade in one straight line</li>
+        <li>Rush</li>
+        <li>Skip corners &amp; recesses</li>
+        <li>Record only one height indoors</li>
+        <li>Forget the Zollstock</li>
+      </ul>
+    </div>
+  </div>
+  <div class="nextsec"><button class="cta-button secondary up" onclick="show('home')"><span>← All topics</span></button></div>
+</div>
+
+</div><!-- /guide-content -->
+</div><!-- /stage -->
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img class="logo-lockup" src="assets/logo/twincloud-logo-lockup-footer.svg" alt="TwinCloud">
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="impressum.html">Imprint</a>
+      </nav>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-utility">
+      <p>© 2026 TwinCloud. All rights reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+var views = ['home','setup','technique','scenes','cheatsheet'];
+var crumbs = {home:'360° Capture Guide', setup:'Setup', technique:'Technique', scenes:'Scenes', cheatsheet:'Cheat sheet'};
+var stepToView = {s1:'setup',s2:'setup',s3:'technique',s4:'technique',s5:'technique',s6:'technique',s7:'scenes',s8:'scenes',s9:'scenes'};
+
+function show(v, keepHash){
+  if(views.indexOf(v)<0) v='home';
+  document.querySelectorAll('.view').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('v-'+v).classList.add('active');
+  if(!keepHash) { try { history.replaceState(null,'','#'+ (v==='home' ? '' : v)); } catch(e) {} }
+  window.scrollTo(0,0);
+}
+function route(){
+  var h = location.hash.replace('#','');
+  if(stepToView[h]){
+    show(stepToView[h], true);
+    var el = document.getElementById(h);
+    if(el){ setTimeout(function(){ el.scrollIntoView({block:'start'}); }, 50); }
+  } else {
+    show(h || 'home', true);
+  }
+}
+function tick(el){ el.classList.toggle('done'); }
+function resetChecks(){ document.querySelectorAll('#routine .chk').forEach(function(c){ c.classList.remove('done'); }); }
+
+var headerPill = document.querySelector('.header-pill');
+if (headerPill) {
+  window.addEventListener('scroll', function () {
+    headerPill.classList.toggle('is-scrolled', window.scrollY > 8);
+  }, { passive: true });
+}
+
+window.addEventListener('hashchange', route);
+route();
+</script>
+</body>
+</html>
